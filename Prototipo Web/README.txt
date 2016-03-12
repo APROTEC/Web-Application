@@ -1,0 +1,1 @@
+Abrir LogIn.html para ver correctamente el prototipo de la pagina web

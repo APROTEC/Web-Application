@@ -1,0 +1,132 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="styles/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+  </head><body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="Eventos.html" style="margin-left:20px;margin-right:30px"><img src="logoTEC.png" style="max-width:160px; margin-top: -2px;"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="Eventos.html">Eventos</a>
+            </li>
+            <li>
+              <a href="Funcionarios.html">Funcionarios</a>
+            </li>
+            <li>
+              <a href="groups.html">Grupos</a>
+            </li>
+            <li>
+              <a href="#">Cuotas</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="account.html">Cuenta</a>
+                </li>
+                <li>
+                  <a href="managers.html">Administradores</a>
+                </li>
+                <li>
+                  <a href="LogIn.html">Salir</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="jumbotron">
+              <div class="container">
+                <div class="jumbotron" style="background-color:white; border-radius: 30px; ">
+                  <h2>
+                    <center>Nuevo Evento</center>
+                  </h2>
+                </div>
+              </div>
+              <div class="container-fluid">
+                <form role="form">
+                  <div class="section">
+                    <div class="container">
+                      <h2>Información General</h2>
+                      <hr>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="control-label" for="exampleInputName">Nombre del evento</label>
+                          <input class="form-control" id="exampleInputName" placeholder="Nombre" type="text">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="exampleInputArea">Fecha</label>
+                          <input class="form-control" id="exampleInputArea" type="date">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="exampleInputOrigin">Monto Presupuestado</label>
+                          <input class="form-control" id="exampleInputOrigin" type="number" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="exampleInputOrigin">Costo Real</label>
+                          <input class="form-control" id="exampleInputOrigin" type="text" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="exampleInputPassword1">Lugar</label>
+                          <textarea class="form-control" id="exampleInputPassword1" type="text"></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="type">Tipo</label>
+                          <select class="form-control" id="sel1">
+                            <option>Charlas</option>
+                            <option>Paseos</option>
+                            <option>Actividad Social</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="exampleInputOrigin">Capacidad Máxima</label>
+                          <input class="form-control" id="exampleInputOrigin" type="number" value="0">
+                        </div>
+                        <div class="form-group">
+                          <label for="type">Invitados</label>
+                          <select class="form-control" id="sel1">
+                            <option>Grupo 1</option>
+                            <option>Grupo 2</option>
+                            <option>Grupo 3</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <row>
+                <center>
+                  <button type="submit" class="btn btn-primary">Crear evento</button>
+                </center>
+              </row>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+</body></html>

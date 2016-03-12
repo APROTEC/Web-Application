@@ -1,0 +1,344 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="styles/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="styles/styles.css" rel="stylesheet" type="text/css">
+  </head><body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="Eventos.html" style="margin-left:20px;margin-right:30px"><img src="logoTEC.png" style="max-width:160px; margin-top: -2px;"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="Eventos.html">Eventos</a>
+            </li>
+            <li>
+              <a href="Funcionarios.html">Funcionarios</a>
+            </li>
+            <li>
+              <a href="groups.html">Grupos</a>
+            </li>
+            <li>
+              <a href="#">Cuotas</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="account.html">Cuenta</a>
+                </li>
+                <li>
+                  <a href="managers.html">Administradores</a>
+                </li>
+                <li>
+                  <a href="LogIn.html">Salir</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="section">
+      <div class="container-fluid">
+        <h2 class="text-center">Nombre del Evento</h2>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="sidebar-nav" style="margin-top:65;">
+                    <div class="navbar navbar-default" role="navigation">
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                      </div>
+                      <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                        <ul class="nav navbar-nav">
+                          <li>
+                            <a href="event.html">Información General</a>
+                          </li>
+                          <li class="active">
+                            <a href="guests.html">Invitados</a>
+                          </li>
+                          <li>
+                            <a href="#">Responsables</a>
+                          </li>
+                          <li>
+                            <a href="eventDocuments.html">Documentos</a>
+                          </li>
+                          <li>
+                            <a href="#">Historial</a>
+                          </li>
+                          <li>
+                            <a href="comments.html">Comentarios<span class="badge" style="float:right">10</span></a>
+                          </li>
+                        </ul>
+                      </div>
+                      <!--/.nav-collapse -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-10">
+                  <div class="section">
+                    <div class="container-fluid">
+                      <h2>Invitados</h2>
+                      <hr>
+                      <div class="section">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="container-fluid">
+                                <h2>Grupos
+                                  <a class="btn btn-primary" data-toggle="modal" data-target="#GroupModal" style="float: right;">Agregar grupo</a>
+                                </h2>
+                                <div class="section">
+                                  <div class="container-fluid">
+                                    <div class="col-md-6" style="margin-top:15px;">
+                                      <div class="jumbotron" style="padding:0px;border-style: ridge;">
+                                        <div class="container-fluid">
+                                          <h3>Grupo
+                                            <button class="btn btn-danger" style="float: right;" type="button">
+                                              <span class="	glyphicon glyphicon-trash"></span>
+                                            </button>
+                                          </h3>
+                                          <p style="font-size:15px;">Cantidad de personas:</p>
+                                          <div class="container-fluid"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:15px;">
+                                      <div class="jumbotron" style="padding:0px;border-style: ridge;">
+                                        <div class="container-fluid">
+                                          <h3>Grupo
+                                            <button class="btn btn-danger" style="float: right;" type="button">
+                                              <span class="	glyphicon glyphicon-trash"></span>
+                                            </button>
+                                          </h3>
+                                          <p style="font-size:15px;">Cantidad de personas:</p>
+                                          <div class="container-fluid"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:15px;">
+                                      <div class="jumbotron" style="padding:0px;border-style: ridge;">
+                                        <div class="container-fluid">
+                                          <h3>Grupo
+                                            <button class="btn btn-danger" style="float: right;" type="button">
+                                              <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                          </h3>
+                                          <p style="font-size:15px;">Cantidad de personas:</p>
+                                          <div class="container-fluid"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="section">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="container-fluid">
+                                <h2>Funcionarios
+                                  <a class="btn btn-primary" data-toggle="modal" data-target="#functionariesModal" style="float: right;">Agregar funcionario</a>
+                                </h2>
+                                <div class="section">
+                                  <div class="container-fluid">
+                                    <div class="col-md-4" style="margin-top:20px">
+                                      <div class="jumbotron" style="padding:0px">
+                                        <div class="container">
+                                          <div class="col-md-4" style="margin-top:15px">
+                                            <a href="funcionario.html"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive"></a>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            <a href="funcionario.html">
+                                        <h3 class="text-left" style="font-size:22px">John Doe</h3>
+                                        <p class="text-left" style="color:black; font-size:16px">Profesion</p>
+                                         </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4" style="margin-top:20px">
+                                      <div class="jumbotron" style="padding:0px">
+                                        <div class="container">
+                                          <div class="col-md-4" style="margin-top:15px">
+                                            <a href="funcionario.html"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive"></a>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            <a href="funcionario.html">
+                                        <h3 class="text-left" style="font-size:22px">John Doe</h3>
+                                        <p class="text-left" style="color:black; font-size:16px">Profesion</p>
+                                         </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4" style="margin-top:20px">
+                                      <div class="jumbotron" style="padding:0px">
+                                        <div class="container">
+                                          <div class="col-md-4" style="margin-top:15px">
+                                            <a href="funcionario.html"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive"></a>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            <a href="funcionario.html">
+                                        <h3 class="text-left" style="font-size:22px">John Doe</h3>
+                                        <p class="text-left" style="color:black; font-size:16px">Profesion</p>
+                                         </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4" style="margin-top:20px">
+                                      <div class="jumbotron" style="padding:0px">
+                                        <div class="container">
+                                          <div class="col-md-4" style="margin-top:15px">
+                                            <a href="funcionario.html"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive"></a>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            <a href="funcionario.html">
+                                        <h3 class="text-left" style="font-size:22px">John Doe</h3>
+                                        <p class="text-left" style="color:black; font-size:16px">Profesion</p>
+                                         </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4" style="margin-top:20px">
+                                      <div class="jumbotron" style="padding:0px">
+                                        <div class="container">
+                                          <div class="col-md-4" style="margin-top:15px">
+                                            <a href="funcionario.html"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive"></a>
+                                          </div>
+                                          <div class="col-md-8">
+                                            <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            <a href="funcionario.html">
+                                        <h3 class="text-left" style="font-size:22px">John Doe</h3>
+                                        <p class="text-left" style="color:black; font-size:16px">Profesion</p>
+                                         </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="GroupModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Agregar Grupos</h4>
+          </div>
+          <div class="modal-body">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="">Grupo 1</label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="">Grupo 2</label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="">Grupo 3</label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="">Grupo 4</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
+            <a class="btn btn-primary">Agregar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="functionariesModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Agregar Funcionarios</h4>
+          </div>
+          <div class="modal-body">
+            <div class="section">
+              <div class="container-fluid">
+                <a href="#" data-toggle="popover" data-content="Some content inside
+                the popover" data-placement="bottom">
+                <input type="search" class="form-control" placeholder="Ingrese su búsqueda" style="float: center;text-align:center" data-placement="bottom" autocomplete="on">
+              </a>
+              </div>
+            </div>
+            <div class="container-fluid">
+              <textarea id="mytext" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
+            <a class="btn btn-primary">Agregar</a>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover(); 
+        });
+      </script>
+    </div>
+  
+
+</body></html>
