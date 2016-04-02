@@ -1,0 +1,66 @@
+<div class="section">
+  <div class="container-fluid" >
+    <div class="col-md-2 filter-column">
+      <div class="jumbotron filterContainer">
+        <h3 style="text-align:center">Filtros</h3>
+        <hr><br>
+        <p>Provincia</p>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Heredia</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">San José</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Cartago</label>
+        </div>
+        <br>
+        <p>Sexo</p>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Hombre</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Mujer</label>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-10" style="padding-left:0px; padding-right:50px">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Asociados</h1>
+        </div>
+      </div>
+      <div class="section">
+        <div class="container-fluid">
+          <div class="row">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#newAssociateModal"style="float: right;">Registrar nuevo asociado</a>
+          </div>
+          <div class="row text-center">
+            <div class="container" style="max-width:600">
+              <input type="search" placeholder="Ingrese su búsqueda" style="float: center;text-align:center;" class="form-control" #term (keyup)="searchAssociates(term.value)">
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="col-md-12">
+            <div class="section">
+              <div class="container-fluid">
+                <div *ngFor="#associate of tempAssociates" class="col-md-3">
+                  <div class="section">
+                    <div class="container-fluid associateContainer" >
+                      <a (click)="goToAssociate(associate)"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="center-block img-circle img-responsive" style="max-width:160px;" href="Funcionario.html">
+                      <h3 class="text-center">{{associate.nombre}}</h3>
+                      <p class="text-center">{{associate.apellidos}}</p></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<associateNew></associateNew>

@@ -1,0 +1,4 @@
+app/typings/
+app/node_modules/
+app/*.js
+app/*.js.map

@@ -1,0 +1,47 @@
+<div class="section">
+  <div class="container">
+    <div class="jumbotron" style="padding:0px">
+      <div class="container">
+        <h2 class="text-left">Cuenta
+          <a class="btn btn-primary" style="margin-left: 10px;" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
+        </h2>
+      </div>
+      <hr>
+      <div class="section">
+        <div class="container-fluid">
+          <form role="form" (ngSubmit)="onSubmit()" #accountForm="ngForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label" for="name">Nombre</label>
+                  <input class="form-control" type="text" [readonly]="!isEditing" [(ngModel)]="_Manager.name" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="lastNames">Apellidos</label>
+                  <input class="form-control" type="text" [readonly]="!isEditing" [(ngModel)]="_Manager.lastNames" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="email">Correo Institucional</label>
+                  <input class="form-control" type="email" [readonly]="!isEditing" [(ngModel)]="_Manager.institutionalEmail" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label class="control-label" for="password">Contraseña</label>
+                  <input class="form-control" type="password" [readonly]="!isEditing" [(ngModel)]="_Manager.password" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="repeatedPassword">Repetir contraseña</label>
+                  <input class="form-control" type="password" [readonly]="!isEditing" [(ngModel)]="_Manager.repeatedPassword" required>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-danger" style="float: right;margin-left: 15px;" [style.display]="isEditing ? '' : 'None'">Cancelar</button>
+            <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditing ? '' : 'None'" >Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

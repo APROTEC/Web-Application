@@ -1,0 +1,64 @@
+<body style="background-color:194169;">
+  <div class="section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <row>
+            <h1 class="text-center">Eventos</h1>
+          </row>
+          <div class="section">
+            <div class="container">
+              <div class="row">
+                <a class="btn btn-primary" (click)="createEvent()" style="float:right;">Crear nuevo evento</a>
+              </div>
+              <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Ingrese su búsqueda" #term (keyup)="search(term.value)">
+                    <span class="input-group-btn">
+                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Todos <span class="fa fa-caret-down"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">Charla</a>
+                        </li>
+                        <li>
+                          <a href="#">Paseos</a>
+                        </li>
+                        <li>
+                          <a href="#">Actividad Social</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="row" style="text-align: center; font-size: 15px;">
+                    <label class="checkbox-inline plainText">
+                      <input type="checkbox" value="" checked s>Pendientes</label>
+                    <label class="checkbox-inline plainText">
+                      <input type="checkbox" value="">Realizados</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid ">
+            <div *ngFor="#event of tempEvents" class="col-md-6">
+              <a (click)="goToEvent(event)">
+                <div class="container-fluid eventContainer">
+                  <div class="col-md-12">
+                    <div class="col-md-4" style="width:150px;">
+                      <img src="images/reunion.png" class="img-circle img-responsive">
+                    </div>
+                    <div class="col-md-8">
+                      <h3>{{event.name}}</h3>
+                      <p style="color:black;" class="text-left">{{event.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

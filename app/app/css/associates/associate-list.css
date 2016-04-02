@@ -1,0 +1,26 @@
+.filterContainer {
+  background-color: #9BB1C7;
+  height: 500px;
+  padding: 2px; }
+  .filterContainer p, .filterContainer h3, .filterContainer label {
+    color: #194169; }
+  .filterContainer p {
+    font-size: 20px; }
+
+.filter-column {
+  background-color: #9BB1C7;
+  border-radius: 10px;
+  margin-top: 50px; }
+
+.associateContainer {
+  border-radius: 20px;
+  background-color: #1F4F80;
+  color: white;
+  cursor: pointer;
+  padding-top: 20px;
+  position: relative; }
+  .associateContainer :hover {
+    color: #9BB1C7;
+    left: .1em; }
+
+/*# sourceMappingURL=associate-list.css.map */

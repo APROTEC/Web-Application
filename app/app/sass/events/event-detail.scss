@@ -1,0 +1,20 @@
+
+
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+    ul{
+      float: none;
+      display: block;
+    }
+    li{
+      float: none;
+      display: block;
+      a{
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+    }
+  }
+}

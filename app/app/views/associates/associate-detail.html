@@ -1,0 +1,200 @@
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="images/persona.jpg" class="img-responsive">
+            </div>
+            <div class="col-md-9">
+              <h1>Nombre
+                <a class="btn btn-danger " style="margin-left: 10px;float:right" (click)="deleteAssociate()">Eliminar</a>
+                <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float: right;">Enviar notificación</a>
+              </h1>
+              <h3>Profesión</h3>
+              <p>Origen</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Datos Personales
+    <a class="btn btn-primary" style="margin-left: 10px;" (click)="editPersonalData()"><span class="glyphicon glyphicon-pencil"></span></a>
+  </h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <div class="section">
+          <div class="container">
+            <form role="form" (ngSubmit)="onSubmitPersonalData()" #personalDataForm="ngForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="name">Nombre</label>
+                    <input class="form-control" type="text" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.nombre" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="lastNames">Apellidos</label>
+                    <input class="form-control"  type="text" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.apellidos" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="personalEmail">Correo Personal</label>
+                    <input class="form-control" type="email" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.correo_personal" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="institutionalEmail">Correo Institucional</label>
+                    <input class="form-control"  type="email" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.correo_institucional" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="birthday">Fecha de Nacimiento</label>
+                    <input class="form-control"  type="date" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.fecha_nacimiento">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="id">Identificación</label>
+                    <input class="form-control" type="text" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.cedula"required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="cellphone">Teléfono celular</label>
+                    <input class="form-control" type="text" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.telefono_trabajo">
+                  </div>
+                  <div class="form-group">
+                    <label for="province">Provincia</label>
+                    <select class="form-control" [disabled]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.provincia">
+                      <option *ngFor="#province of provinces" [value]="province">{{province.nombre_provincia}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="type">Cantón</label>
+                    <select class="form-control" [disabled]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.canton" >
+                      <option *ngFor="#canton of cantones" [value]="canton.nombre_canton">{{canton.nombre_canton}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="place">Dirección</label>
+                    <textarea class="form-control" type="text" [(ngModel)]="_ActualAssociate.direction" [readonly]="!isEditingPersonalData"></textarea>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-danger" style="float: right;margin-left: 15px;" (click)="cancelEditPersonalData()" [style.display]="isEditingPersonalData ? '' : 'None'" >Cancelar</button>
+              <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingPersonalData ? '' : 'None'" >Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Ámbito Laboral
+    <a class="btn btn-primary" style="margin-left: 10px;" (click)="editWorkingData()" ><span class="glyphicon glyphicon-pencil" ></span></a>
+  </h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <div class="section">
+          <div class="container">
+            <form role="form" (ngSubmit)="onSubmitWorkingData()" #workingDataForm="ngForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="departmentName">Departamento</label>
+                    <select class="form-control" [disabled]="!isEditingWorkingData" [(ngModel)]="_ActualAssociate.departamento">
+                      <option *ngFor="#department of departments" [value]="department">{{department.nombre_departamento}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="departmentName">Subdepartamento</label>
+                    <input class="form-control" type="text" [readonly]="!isEditingWorkingData"  >
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="headquarters">Sede</label>
+                    <select class="form-control" [disabled]="!isEditingWorkingData">
+                      <option *ngFor="#sede of sedes" [value]="sede" [selected]="sede.codigo_sede == _ActualAssociate.sede.codigo_sede">{{sede.nombre_sede}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="admissionDate" >Fecha de ingreso</label>
+                    <input class="form-control" type="date" [readonly]="!isEditingWorkingData" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="departmentName">Número de extensión</label>
+                    <input class="form-control" type="text" [readonly]="!isEditingWorkingData" [(ngModel)]="_ActualAssociate.numero_extension">
+                  </div>
+                  <div class="form-group">
+                    <label for="type">Grado Académico</label>
+                    <select class="form-control" [disabled]="!isEditingWorkingData">
+                      <option>Charlas</option>
+                      <option>Paseos</option>
+                      <option>Actividad Social</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="departureDate">Fecha de salida</label>
+                    <input class="form-control" type="date" [readonly]="!isEditingWorkingData" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="checkbox-inline" style="font-size:18px">Cargo de jefatura</label>
+                  <input type="checkbox" style="width:25px;height:25px;margin-left:10;" [disabled]="!isEditingWorkingData" [checked]="_ActualAssociate.cargo_jefatura">
+                </div>
+              </div>
+              <button class="btn btn-danger" style="float: right;margin-left: 15px;" (click)="cancelEditWorkingData" [style.display]="isEditingWorkingData ? '' : 'None'" >Cancelar</button>
+              <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingWorkingData ? '' : 'None'" >Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h2>Gustos y Preferencias
+    <a class="btn btn-primary" style="margin-left: 10px;" (click)="editPreferiencesData()"><span class="glyphicon glyphicon-pencil"></span></a>
+  </h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <div class="section">
+          <div class="container">
+            <form role="form" (ngSubmit)="onSubmitPreferiencesData()" #preferiencesDataForm="ngForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="type">Talla de camisa</label>
+                    <select class="form-control" [disabled]="!isEditingPreferienciesData">
+                      <option *ngFor="#shirtSize of shirtSizes" [value]="shirtSize.codigo_talla_camisa" [selected]="shirtSize.codigo_talla_camisa == _ActualAssociate.talla_camisa.codigo_talla_camisa">{{shirtSize.codigo_talla_camisa}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="checkbox-inline" style="font-size:18px"> Vegetalianos</label>
+                    <input type="checkbox" [checked]="_ActualAssociate.vegetariano" style="margin-left:10;width:25px;height:25px;" [disabled]="!isEditingPreferienciesData">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="exampleInputID">...</label>
+                    <input class="form-control" type="text" [readonly]="!isEditingWorkingData" value="...">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-danger" style="float: right;margin-left: 15px;" [style.display]="isEditingPreferienciesData ? '' : 'None'" >Cancelar</button>
+              <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingPreferienciesData ? '' : 'None'" >Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<emailModal></emailModal>

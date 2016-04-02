@@ -1,0 +1,9 @@
+.newEventContainer {
+  color: black;
+  background-color: #D4D5D6;
+  margin-top: 20px;
+  border-style: outset; }
+  .newEventContainer h1, .newEventContainer h2, .newEventContainer h3 {
+    color: black; }
+
+/*# sourceMappingURL=event-new.css.map */

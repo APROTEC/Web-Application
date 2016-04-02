@@ -1,0 +1,15 @@
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none; }
+    .sidebar-nav .navbar .navbar-collapse ul {
+      float: none;
+      display: block; }
+    .sidebar-nav .navbar .navbar-collapse li {
+      float: none;
+      display: block; }
+      .sidebar-nav .navbar .navbar-collapse li a {
+        padding-top: 12px;
+        padding-bottom: 12px; } }
+
+/*# sourceMappingURL=event-detail.css.map */

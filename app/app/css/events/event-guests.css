@@ -1,0 +1,14 @@
+.groupContainer {
+  margin-top: 15px;
+  border-style: ridge;
+  padding: 0px; }
+  .groupContainer h1, .groupContainer h2, .groupContainer h3, .groupContainer p {
+    color: black; }
+
+.associateContainer {
+  padding: 0px;
+  margin-top: 20px; }
+  .associateContainer h1, .associateContainer h2, .associateContainer h3, .associateContainer p {
+    color: black; }
+
+/*# sourceMappingURL=event-guests.css.map */

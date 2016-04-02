@@ -1,0 +1,8 @@
+.documentContainer {
+  margin-top: 15px;
+  border-style: ridge;
+  padding: 0px; }
+  .documentContainer h1, .documentContainer h2, .documentContainer h3, .documentContainer p {
+    color: black; }
+
+/*# sourceMappingURL=event-documents.css.map */
