@@ -15,11 +15,11 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="control-label" for="name">Nombre</label>
-                    <input class="form-control" type="text" [(ngModel)]="_Event.name" [readonly]="!isEditing" required>
+                    <input class="form-control" type="text" [(ngModel)]="_Event.nombre" [readonly]="!isEditing" required>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="date">Fecha</label>
-                    <input class="form-control" type="date" [(ngModel)]="_Event.date" [readonly]="!isEditing" required>
+                    <input class="form-control" type="date" [(ngModel)]="_Event.fecha_hora" [readonly]="!isEditing" required>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="budgetedAmount">Monto Presupuestado</label>
@@ -31,21 +31,19 @@
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="place">Lugar</label>
-                    <textarea class="form-control" type="text" [(ngModel)]="_Event.place" [readonly]="!isEditing" required></textarea>
+                    <textarea class="form-control" type="text" [(ngModel)]="_Event.lugar" [readonly]="!isEditing" required></textarea>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="type">Tipo</label>
                     <select class="form-control" [disabled]="!isEditing">
-                      <option>Charlas</option>
-                      <option>Paseos</option>
-                      <option>Actividad Social</option>
+                      <option *ngFor="#type of eventTypes" [value]="type" >{{type.descripcion}}</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="capacity">Capacidad</label>
-                    <input class="form-control"  type="text" [(ngModel)]="_Event.capacity"  [readonly]="!isEditing" required>
+                    <label class="control-label" for="capacity">Cantidad de acompañantes máximo</label>
+                    <input class="form-control"  type="number" [(ngModel)]="_Event.numero_maximo_acompanantes"  [readonly]="!isEditing" required>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="confirmedParticipants">Participantes Confirmados</label>
@@ -57,7 +55,7 @@
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="description">Descripción</label>
-                    <textarea class="form-control" type="text" [(ngModel)]="_Event.description" [readonly]="!isEditing" required></textarea>
+                    <textarea class="form-control" type="text" [(ngModel)]="_Event.descripcion" [readonly]="!isEditing" required></textarea>
                   </div>
                 </div>
               </div>

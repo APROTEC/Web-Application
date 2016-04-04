@@ -39,7 +39,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../others
                         .catch(this.handleError);
                 };
                 AssociatesService.prototype.getAssociate = function (pAssociate) {
-                    console.log(httpConfig_1.httpConfig.host + "personas/" + pAssociate.toString());
                     return this.http.get(httpConfig_1.httpConfig.host + "personas/" + pAssociate.toString())
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
@@ -74,17 +73,28 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../others
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                AssociatesService.prototype.getSubDepartment = function (pSubDepartment) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "sub_departamentos/" + pSubDepartment)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 AssociatesService.prototype.getSubDepartmentsbyDepartment = function (pDepartment) {
                     return this.http.get(httpConfig_1.httpConfig.host + "sub_departamentos/departamentos/" + pDepartment)
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
                 //-------------------------------------------------- Post ------------------------------------------------
-                AssociatesService.prototype.addAssociate = function (name) {
-                    var body = JSON.stringify({ name: name });
+                AssociatesService.prototype.createAssociate = function (nombre, apellidos, correo_institucional, nombre_usuario) {
+                    var body = JSON.stringify({ nombre: nombre, apellidos: apellidos, correo_institucional: correo_institucional, nombre_usuario: nombre_usuario });
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
-                    return this.http.post(httpConfig_1.httpConfig.host + " ", body, options)
+                    return this.http.post(httpConfig_1.httpConfig.host + "usuarios/" + body, body, options)
+                        .map(function (res) { return res.json().data; })
+                        .catch(this.handleError);
+                };
+                //------------------------------------------- Delete -----------------------------------
+                AssociatesService.prototype.deleteAssociate = function (pAssociate) {
+                    return this.http.delete(httpConfig_1.httpConfig.host + "personas." + pAssociate)
                         .map(function (res) { return res.json().data; })
                         .catch(this.handleError);
                 };

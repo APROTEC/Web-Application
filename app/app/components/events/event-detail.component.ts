@@ -7,7 +7,7 @@ import {EventGuestsComponent} from './event-guests.component';
 import {EventManagersComponent} from './event-managers.component';
 import {EventDocumentsComponent} from './event-documents.component';
 import {EventCommentsComponent} from './event-comments.component';
-import {IEvent} from './event';
+import {Event} from './event';
 
 @Component({
     selector: 'event-detail',
@@ -25,7 +25,7 @@ import {IEvent} from './event';
 ])
 
 export class EventDetailComponent {
-    event: IEvent;
+    event: Event;
     eventId:Number;
     constructor(routeParams: RouteParams, private _router:Router) {
         this.eventId = +routeParams.get('id');

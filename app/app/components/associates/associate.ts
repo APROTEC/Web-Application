@@ -21,15 +21,23 @@ export class Associate{
 }
 export class Province{
   public codigo_provincia:number;
-  public nombre_provincia:number;
+  public nombre_provincia:string;
+  constructor(pCode:number,pName:string){
+    this.codigo_provincia = pCode;
+    this.nombre_provincia = pName;
+  }
 }
 export class Canton{
   public codigo_canton:number;
   public codigo_provincia:number;
   public nombre_canton:string;
+  public nombre_provincia:string;
 }
 export class ShirtSize{
   public codigo_talla_camisa:string;
+  constructor(pCodigo:string){
+    this.codigo_talla_camisa = pCodigo;
+  }
 }
 export class Sede{
   public codigo_sede:number;
@@ -42,9 +50,13 @@ export class Sede{
 export class Department{
   public codigo_departamento:number;
   public nombre_departament:string;
+  constructor(pCode:number,pName:string){
+    this.codigo_departamento = pCode;
+    this.nombre_departament = pName;
+  }
 }
 export class SubDepartment{
   public codigo_sub_departamento:number;
   public codigo_departamento:number;
-  public nombre_departamento:string;
+  public nombre_sub_departamento:string;
 }

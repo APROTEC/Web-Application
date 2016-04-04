@@ -12,7 +12,9 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("Associate", Associate);
             Province = (function () {
-                function Province() {
+                function Province(pCode, pName) {
+                    this.codigo_provincia = pCode;
+                    this.nombre_provincia = pName;
                 }
                 return Province;
             }());
@@ -24,7 +26,8 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("Canton", Canton);
             ShirtSize = (function () {
-                function ShirtSize() {
+                function ShirtSize(pCodigo) {
+                    this.codigo_talla_camisa = pCodigo;
                 }
                 return ShirtSize;
             }());
@@ -38,7 +41,9 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("Sede", Sede);
             Department = (function () {
-                function Department() {
+                function Department(pCode, pName) {
+                    this.codigo_departamento = pCode;
+                    this.nombre_departament = pName;
                 }
                 return Department;
             }());

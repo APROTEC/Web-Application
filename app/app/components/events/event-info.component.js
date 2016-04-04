@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../others/email.component', 'angular2/router', './event'], function(exports_1, context_1) {
+System.register(['angular2/core', '../others/email.component', 'angular2/router', './event', './event.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../others/email.component', 'angular2/router'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, email_component_1, router_1, event_1;
+    var core_1, email_component_1, router_1, event_1, event_service_1;
     var EventInfoComponent;
     return {
         setters:[
@@ -25,19 +25,25 @@ System.register(['angular2/core', '../others/email.component', 'angular2/router'
             },
             function (event_1_1) {
                 event_1 = event_1_1;
+            },
+            function (event_service_1_1) {
+                event_service_1 = event_service_1_1;
             }],
         execute: function() {
             EventInfoComponent = (function () {
-                function EventInfoComponent(_router, _routeParams) {
+                function EventInfoComponent(_router, _routeParams, injector, _EventService) {
                     this._router = _router;
                     this._routeParams = _routeParams;
+                    this.injector = injector;
+                    this._EventService = _EventService;
                     this.isEditing = false;
-                    this._Event = new event_1.IEvent();
+                    this._Event = new event_1.Event();
                 }
                 EventInfoComponent.prototype.ngOnInit = function () {
-                    var id = this._routeParams.get('id');
-                    this._Event.name = id;
-                    //console.log(id);
+                    var params = this.injector.parent.parent.get(router_1.RouteParams);
+                    this._Event.codigo_evento = params.get('id');
+                    this.getEvent(this._Event.codigo_evento);
+                    this.getTypesEvents();
                 };
                 EventInfoComponent.prototype.onSubmit = function () {
                     this.isEditing = false;
@@ -53,6 +59,14 @@ System.register(['angular2/core', '../others/email.component', 'angular2/router'
                 EventInfoComponent.prototype.edit = function () {
                     this.isEditing = true;
                 };
+                EventInfoComponent.prototype.getEvent = function (pEvent) {
+                    var _this = this;
+                    this._EventService.getEvent(pEvent).subscribe(function (event) { return _this._Event = event[0]; }, function (error) { return _this.erroMsg = error; });
+                };
+                EventInfoComponent.prototype.getTypesEvents = function () {
+                    var _this = this;
+                    return this._EventService.getTypesEvents().toPromise().then(function (eventTypes) { return _this.eventTypes = eventTypes; }, function (error) { return _this.erroMsg = error; });
+                };
                 EventInfoComponent = __decorate([
                     core_1.Component({
                         selector: 'eventInfo',
@@ -60,7 +74,7 @@ System.register(['angular2/core', '../others/email.component', 'angular2/router'
                         styleUrls: ['app/css/events/event-info.css'],
                         directives: [email_component_1.emailComponent]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams])
+                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, core_1.Injector, event_service_1.EventService])
                 ], EventInfoComponent);
                 return EventInfoComponent;
             }());

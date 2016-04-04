@@ -12,59 +12,20 @@
             </div>
             <div class="row text-center">
               <div class="container" style="max-width:600">
-                <input type="search" placeholder="Ingrese su búsqueda" style="float: center;text-align:center;" class="form-control">
+                <input type="search" placeholder="Ingrese su búsqueda" style="float: center;text-align:center;" class="form-control" #term (keyup)="search(term.value)">
               </div>
             </div>
           </div>
         </div>
         <div class="container-fluid">
-          <div class="col-md-4 groupContainer" style="padding-top:20px;" >
-            <a (click)="goToGroup()">
-            <div class="jumbotron" style="padding-top:10px;padding-bottom:10px">
-
-              <h3>Grupo</h3>
-              <div clas="row" style=" color:black;">
-                <p style="font-size:16px;">Cantidad de personas:</p>
+          <div class="col-md-4 groupContainer" style="padding-top:20px;" *ngFor="#group of tempGroups">
+            <a (click)="goToGroup(group.codigo_grupo)">
+              <div class="jumbotron" style="padding-top:10px;padding-bottom:10px">
+                <h3>{{group.descripcion_grupo}}</h3>
+                <div clas="row" style=" color:black;">
+                  <p style="font-size:16px;">0 personas</p>
+                </div>
               </div>
-
-            </div>
-            </a>
-          </div>
-          <div class="col-md-4" style="padding-top:20px;">
-            <a href="group.html">
-            <div class="jumbotron" style="padding-top:10px;padding-bottom:10px">
-
-              <h3>Grupo</h3>
-              <div clas="row" style=" color:black;">
-                <p style="font-size:16px;">Cantidad de personas:</p>
-              </div>
-
-            </div>
-            </a>
-          </div>
-          <div class="col-md-4" style="padding-top:20px;">
-            <a href="group.html">
-            <div class="jumbotron" style="padding-top:10px;padding-bottom:10px">
-
-              <h3>Grupo</h3>
-              <div clas="row" style=" color:black;">
-                <p style="font-size:16px;">Cantidad de personas:</p>
-              </div>
-
-            </div>
-
-            </a>
-          </div>
-          <div class="col-md-4" style="padding-top:20px;">
-            <a href="group.html">
-            <div class="jumbotron" style="padding-top:10px;padding-bottom:10px">
-
-              <h3>Grupo</h3>
-              <div clas="row" style=" color:black;">
-                <p style="font-size:16px;">Cantidad de personas:</p>
-              </div>
-
-            </div>
             </a>
           </div>
         </div>

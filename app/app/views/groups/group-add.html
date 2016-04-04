@@ -6,26 +6,14 @@
         <h4 class="modal-title">Agregar Grupos</h4>
       </div>
       <div class="modal-body">
-        <div class="checkbox">
+        <div class="checkbox" *ngFor="#group of _Groups">
           <label>
-            <input type="checkbox" value="">Grupo 1</label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="">Grupo 2</label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="">Grupo 3</label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="">Grupo 4</label>
+            <input type="checkbox" [checked]="group.state" (click)="changeState(group,group.state)" >{{group.descripcion_grupo}}</label>
         </div>
       </div>
       <div class="modal-footer">
         <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
-        <a class="btn btn-primary">Agregar</a>
+        <a class="btn btn-primary" (click)="addGroups()" >Agregar</a>
       </div>
     </div>
   </div>

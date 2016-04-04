@@ -38,6 +38,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './
                     this.actualUser = new user_1.User();
                     this._User = new user_1.User();
                     this.logged = false;
+                    this.showWarningMsg = false;
                 }
                 logInComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -58,7 +59,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './
                         _this._cookieService.put("password", _this.actualUser.contrasena);
                         _this._cookieService.put("userType", _this._User.codigo_tipo_usuario);
                         _this._router.navigate(['Navbar']);
-                    }).catch(function (c) { return console.log("usuario incorrecto"); });
+                    }).catch(function (c) {
+                        console.log("usuario incorrecto"),
+                            _this.showWarningMsg = true;
+                    });
                 };
                 logInComponent.prototype.verifyUser = function (pUserName, pPassword) {
                     var _this = this;

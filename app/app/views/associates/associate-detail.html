@@ -8,12 +8,12 @@
               <img src="images/persona.jpg" class="img-responsive">
             </div>
             <div class="col-md-9">
-              <h1>Nombre
+              <h1>{{_ActualAssociate.nombre}}
                 <a class="btn btn-danger " style="margin-left: 10px;float:right" (click)="deleteAssociate()">Eliminar</a>
                 <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float: right;">Enviar notificación</a>
               </h1>
-              <h3>Profesión</h3>
-              <p>Origen</p>
+              <h3>{{_ActualAssociate.apellidos}}</h3>
+              <p>{{_ActualAssociate.correo_institucional}}</p>
             </div>
           </div>
         </div>
@@ -66,19 +66,15 @@
                   </div>
                   <div class="form-group">
                     <label for="province">Provincia</label>
-                    <select class="form-control" [disabled]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.provincia">
-                      <option *ngFor="#province of provinces" [value]="province">{{province.nombre_provincia}}</option>
+                    <select class="form-control" [disabled]="!isEditingPersonalData">
+                      <option *ngFor="#province of provinces" [value]="province" [selected]="province.codigo_provincia == _ActualAssociate.provincia.codigo_provincia">{{province.nombre_provincia}}</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="type">Cantón</label>
-                    <select class="form-control" [disabled]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.canton" >
-                      <option *ngFor="#canton of cantones" [value]="canton.nombre_canton">{{canton.nombre_canton}}</option>
+                    <select class="form-control" [disabled]="!isEditingPersonalData">
+                      <option *ngFor="#canton of cantones" [value]="canton.nombre_canton" [selected]="canton.codigo_canton == _ActualAssociate.canton.codigo_canton">{{canton.nombre_canton}}</option>
                     </select>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="place">Dirección</label>
-                    <textarea class="form-control" type="text" [(ngModel)]="_ActualAssociate.direction" [readonly]="!isEditingPersonalData"></textarea>
                   </div>
                 </div>
               </div>
@@ -106,13 +102,15 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="control-label" for="departmentName">Departamento</label>
-                    <select class="form-control" [disabled]="!isEditingWorkingData" [(ngModel)]="_ActualAssociate.departamento">
-                      <option *ngFor="#department of departments" [value]="department">{{department.nombre_departamento}}</option>
+                    <select class="form-control" [disabled]="!isEditingWorkingData">
+                      <option *ngFor="#department of departments" [value]="department" [selected]="department.codigo_departamento == _ActualAssociate.departamento.codigo_departamento">{{department.nombre_departamento}}</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="departmentName">Subdepartamento</label>
-                    <input class="form-control" type="text" [readonly]="!isEditingWorkingData"  >
+                    <select class="form-control" [disabled]="!isEditingWorkingData">
+                      <option *ngFor="#subDepartment of subDepartments" [value]="subDepartment" [selected]="subDepartment.codigo_sub_departamento == _ActualAssociate.sub_departamento.codigo_sub_departamento">{{subDepartment.nombre_sub_departamento}}</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="headquarters">Sede</label>
@@ -173,18 +171,14 @@
                   <div class="form-group">
                     <label for="type">Talla de camisa</label>
                     <select class="form-control" [disabled]="!isEditingPreferienciesData">
-                      <option *ngFor="#shirtSize of shirtSizes" [value]="shirtSize.codigo_talla_camisa" [selected]="shirtSize.codigo_talla_camisa == _ActualAssociate.talla_camisa.codigo_talla_camisa">{{shirtSize.codigo_talla_camisa}}</option>
+                      <option *ngFor="#shirtSize of shirtSizes" [value]="shirtSize.codigo_talla_camisa" [selected]="shirtSize.codigo_talla_camisa == _ActualAssociate.talla_camisa.codigo_talla_camisa ">{{shirtSize.codigo_talla_camisa}}</option>
                     </select>
-                  </div>
-                  <div class="form-group">
-                    <label class="checkbox-inline" style="font-size:18px"> Vegetalianos</label>
-                    <input type="checkbox" [checked]="_ActualAssociate.vegetariano" style="margin-left:10;width:25px;height:25px;" [disabled]="!isEditingPreferienciesData">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label" for="exampleInputID">...</label>
-                    <input class="form-control" type="text" [readonly]="!isEditingWorkingData" value="...">
+                    <label class="checkbox-inline" style="font-size:18px"> Vegetariano</label>
+                    <input type="checkbox" [checked]="_ActualAssociate.vegetariano" style="margin-left:10;width:25px;height:25px;" [disabled]="!isEditingPreferienciesData">
                   </div>
                 </div>
               </div>

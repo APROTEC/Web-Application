@@ -13,26 +13,34 @@ import {AssociatesService} from './associate.service'
 
 
 export class AssociatesComponent implements OnInit{
-    _ActualAssociate = new Associate();
-    _Associates:Associate[];
-    tempAssociates:Associate[];
+    _ActualAssociate = new Array<Associate>();
+    _Associates= new Array<Associate>()
+    tempAssociates= new Array<Associate>();
     errorMessage:string;
+    isSearchEmpty = true;
     ngOnInit(){
       this.getAssociates();
     }
     constructor( private _router:Router, private _AssociatesService:AssociatesService){
-          this.tempAssociates = this._Associates;
+      setInterval( ()=>
+        {this.getAssociates();
+      },1000);
     }
     goToAssociate(pAssociate:Associate){
         this._router.navigate( ['AssociateDetail', { id: pAssociate.codigo_informacion_persona }] );
     }
     getAssociates(){
-      this._AssociatesService.getAssociates().toPromise().then(associates => this._Associates = associates).then(tempAssociates => this.tempAssociates = tempAssociates);
+      this._AssociatesService.getAssociates().subscribe(
+          associates => {this._Associates = associates;
+            if (this.isSearchEmpty){this.tempAssociates = associates}
+          },error =>  this.errorMessage = <any>error);
     }
     searchAssociates(term: string){
       if (term==""){
+          this.isSearchEmpty = true;
           this.tempAssociates = this._Associates;
       }else{
+          this.isSearchEmpty = false;
           this.tempAssociates = this._Associates.filter(associate => associate.nombre.toLowerCase().includes(term));
       }
     }

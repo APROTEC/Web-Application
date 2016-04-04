@@ -1,7 +1,8 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Injector} from 'angular2/core';
 import {emailComponent} from '../others/email.component';
 import {Router, RouteParams} from 'angular2/router';
-import {IEvent} from './event';
+import {Event,EventType} from './event';
+import {EventService} from './event.service';
 
 @Component({
     selector: 'eventInfo',
@@ -10,16 +11,17 @@ import {IEvent} from './event';
     directives:[emailComponent]
 })
 
-export class EventInfoComponent {
+export class EventInfoComponent implements OnInit{
     isEditing = false;
-    _Event = new IEvent();
-    constructor(private _router:Router, private _routeParams:RouteParams){
-
-    }
+    _Event = new Event();
+    eventTypes:EventType[];
+    erroMsg:string;
+    constructor(private _router:Router, private _routeParams:RouteParams,private injector: Injector, private _EventService:EventService){}
     ngOnInit() {
-      let id = this._routeParams.get('id');
-      this._Event.name = id;
-      //console.log(id);
+      let params = this.injector.parent.parent.get(RouteParams);
+      this._Event.codigo_evento = params.get('id');
+      this.getEvent(this._Event.codigo_evento);
+      this.getTypesEvents();
     }
     onSubmit(){
         this.isEditing = false;
@@ -35,5 +37,16 @@ export class EventInfoComponent {
     }
     edit(){
       this.isEditing = true;
+    }
+    getEvent(pEvent:number){
+      this._EventService.getEvent(pEvent).subscribe(
+        event => this._Event = event[0],
+        error => this.erroMsg = error
+      )
+    }
+    getTypesEvents(){
+      return this._EventService.getTypesEvents().toPromise().then(
+                            eventTypes=> this.eventTypes = eventTypes,
+                            error =>  this.erroMsg = <any>error);
     }
 }

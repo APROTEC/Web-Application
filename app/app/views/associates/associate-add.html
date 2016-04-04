@@ -8,32 +8,26 @@
       <div class="modal-body">
         <div class="section">
           <div class="container-fluid bodyContainer">
-              <input type="search" class="form-control" placeholder="Ingrese su búsqueda" style="float: center;text-align:center" data-placement="bottom" autocomplete="on">
+              <input type="search" class="form-control" placeholder="Ingrese su búsqueda" style="float: center;text-align:center" #term (keyup)="search(term.value)">
               <div class='suggest-holder'>
                 <ul>
-                    <li>
-                        <span class='suggest-name'>Michael</span>
-                        <span class='suggest-description'>The Writer</span>
-                    </li>
-                    <li>
-                        <span class='suggest-name'>Ben</span>
-                        <span class='suggest-description'>The Other Writer</span>
-                    </li>
-                    <li>
-                        <span class='suggest-name'>Ben</span>
-                        <span class='suggest-description'>The CodeIgniter Writer</span>
+                    <li *ngFor="#associate of tempAssociates" (click)="addTempAssociate(associate)">
+                        <span class='suggest-name'>{{associate.nombre}}</span>
+                        <span class='suggest-description'>{{associate.apellidos}}</span>
                     </li>
                 </ul>
               </div>
           </div>
         </div>
         <div class="container-fluid">
-          <textarea id="mytext" class="form-control"></textarea>
+          <p>Asociados por agregar:</p>
+          <text *ngFor="#associate of associatesToAdd">{{associate.nombre}} {{associate.apellidos}}; </text>
         </div>
+
       </div>
       <div class="modal-footer">
         <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
-        <a class="btn btn-primary">Agregar</a>
+        <a class="btn btn-primary" (click)="addAssociates()">Agregar</a>
       </div>
     </div>
   </div>

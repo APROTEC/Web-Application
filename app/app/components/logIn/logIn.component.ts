@@ -13,6 +13,7 @@ export class logInComponent implements OnInit{
     actualUser = new User();
     _User:User = new User();
     logged : boolean = false;
+    showWarningMsg : boolean = false;
     ngOnInit(){
       let userName:string = this._cookieService.get("userName");
       let password:string = this._cookieService.get("password");
@@ -37,7 +38,8 @@ export class logInComponent implements OnInit{
             this._router.navigate( ['Navbar']);
           }
         ).catch(
-          c => console.log("usuario incorrecto")
+          c => {console.log("usuario incorrecto"),
+          this.showWarningMsg = true;}
         );
     }
 

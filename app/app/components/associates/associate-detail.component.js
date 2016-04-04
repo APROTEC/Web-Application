@@ -43,10 +43,10 @@ System.register(['angular2/core', 'angular2/router', './associate', '../others/e
                     this.getAssociate(+this.associateId);
                 }
                 AssociateDetailComponent.prototype.ngOnInit = function () {
-                    this.getProvinces();
-                    this.getShirtSizes();
+                    //this.getProvinces();
+                    //this.getShirtSizes();
                     //this.getSedes();
-                    this.getDepartments();
+                    //this.getDepartments();
                     //this.getCantonesbyProvince();
                     //thiks.getSubDepartmentsbyDepartment();
                 };
@@ -65,7 +65,7 @@ System.register(['angular2/core', 'angular2/router', './associate', '../others/e
                 AssociateDetailComponent.prototype.editPersonalData = function () {
                     this.isEditingPersonalData = true;
                     //console.log(this.cantones[1]);
-                    console.log(this._ActualAssociate.provincia);
+                    //console.log(this._ActualAssociate.provincia);
                 };
                 //-------------WorkingData
                 AssociateDetailComponent.prototype.onSubmitWorkingData = function () {
@@ -76,7 +76,6 @@ System.register(['angular2/core', 'angular2/router', './associate', '../others/e
                 };
                 AssociateDetailComponent.prototype.editWorkingData = function () {
                     this.isEditingWorkingData = true;
-                    console.log(this._ActualAssociate.sede);
                 };
                 //--------------------Preferiences
                 AssociateDetailComponent.prototype.onSubmitPreferiencesData = function () {
@@ -87,19 +86,23 @@ System.register(['angular2/core', 'angular2/router', './associate', '../others/e
                 };
                 AssociateDetailComponent.prototype.editPreferiencesData = function () {
                     this.isEditingPreferienciesData = true;
+                    console.log(this._ActualAssociate.talla_camisa.codigo_talla_camisa);
                 };
                 //-------------------------- Getters ---------------------------------------------
                 AssociateDetailComponent.prototype.getProvinces = function () {
                     var _this = this;
                     this._AssociatesService.getProvinces().subscribe(function (provinces) { return _this.provinces = provinces; }, function (error) { return _this.errorMessage = error; });
                 };
+                AssociateDetailComponent.prototype.getCantonesbyProvince = function (pProvince) {
+                    var _this = this;
+                    this._AssociatesService.getCantonesbyProvince(pProvince).toPromise().then(function (cantones) { return _this.cantones = cantones; }, function (error) { return _this.errorMessage = error; });
+                };
+                AssociateDetailComponent.prototype.getCanton = function (pCanton) {
+                    return this._AssociatesService.getCanton(pCanton).toPromise();
+                };
                 AssociateDetailComponent.prototype.getShirtSizes = function () {
                     var _this = this;
                     return this._AssociatesService.getShirtSizes().toPromise().then(function (shirtSizes) { return _this.shirtSizes = shirtSizes; }, function (error) { return _this.errorMessage = error; });
-                };
-                AssociateDetailComponent.prototype.getCantonesbyProvince = function (pProvince) {
-                    var _this = this;
-                    this._AssociatesService.getCantonesbyProvince(pProvince).subscribe(function (cantones) { return _this.cantones = cantones; }, function (error) { return _this.errorMessage = error; });
                 };
                 AssociateDetailComponent.prototype.getSedes = function () {
                     var _this = this;
@@ -109,9 +112,12 @@ System.register(['angular2/core', 'angular2/router', './associate', '../others/e
                     var _this = this;
                     this._AssociatesService.getDepartments().subscribe(function (departments) { return _this.departments = departments; }, function (error) { return _this.errorMessage = error; });
                 };
+                AssociateDetailComponent.prototype.getSubDepartment = function (pSubDepartment) {
+                    return this._AssociatesService.getSubDepartment(pSubDepartment).toPromise();
+                };
                 AssociateDetailComponent.prototype.getSubDepartmentsbyDepartment = function (pDepartment) {
                     var _this = this;
-                    this._AssociatesService.getSubDepartmentsbyDepartment(pDepartment).subscribe(function (subDepartments) { return _this.subDepartments = subDepartments; }, function (error) { return _this.errorMessage = error; });
+                    return this._AssociatesService.getSubDepartmentsbyDepartment(pDepartment).subscribe(function (subDepartments) { return _this.subDepartments = subDepartments; }, function (error) { return _this.errorMessage = error; });
                 };
                 AssociateDetailComponent.prototype.getAssociate = function (pAssociate) {
                     var _this = this;
@@ -122,7 +128,12 @@ System.register(['angular2/core', 'angular2/router', './associate', '../others/e
                         //sede
                         _this.getSedes().then(function (res) { return _this._Associate.sede = res.find(function (i) { return i.codigo_sede == associate[0].codigo_sede; }); });
                         //talla_camisa
-                        _this.getShirtSizes().then(function (res) { return _this._Associate.talla_camisa = res.find(function (i) { return i.codigo_talla_camisa == associate[0].codigo_talla_camisa; }); }).then(function (res) { return console.log(_this._Associate.talla_camisa.codigo_talla_camisa); });
+                        _this.getShirtSizes().then(function (res) { return _this._Associate.talla_camisa = res.find(function (i) { return i.codigo_talla_camisa == associate[0].codigo_talla_camisa; }); });
+                        //canton y provincia
+                        _this.getCanton(associate[0].codigo_canton).then(function (canton) { return _this._Associate.canton = canton[0]; }).then(function (res) { return _this._Associate.provincia = new associate_1.Province(_this._Associate.canton.codigo_provincia, _this._Associate.canton.nombre_provincia); }).then(function (r) { return _this.getProvinces(); }).then(function (r) { return _this.getCantonesbyProvince(_this._Associate.provincia.codigo_provincia); });
+                        //departamento y sub_departamento
+                        console.log(associate[0].codigo_sub_departamento);
+                        _this.getSubDepartment(associate[0].codigo_sub_departamento).then(function (subDepartment) { return _this._Associate.sub_departamento = subDepartment[0]; }).then(function (r) { return _this._Associate.departamento = new associate_1.Department(_this._Associate.sub_departamento.codigo_departamento, ""); }).then(function (r) { return _this.getDepartments(); }).then(function (r) { return _this.getSubDepartmentsbyDepartment(_this._Associate.departamento.codigo_departamento); });
                         _this._ActualAssociate = _this._Associate;
                     }, function (error) { return _this.errorMessage = error; });
                 };

@@ -12,30 +12,24 @@
                 <a class="btn btn-primary" (click)="createEvent()" style="float:right;">Crear nuevo evento</a>
               </div>
               <div class="row">
-                <div class="col-md-offset-3 col-md-6">
-                  <div class="input-group">
+                <div class="col-md-offset-2 col-md-12">
+                  <div class="col-md-6">
                     <input type="text" class="form-control" placeholder="Ingrese su búsqueda" #term (keyup)="search(term.value)">
+                  </div>
+                  <div class="col-md-2">
                     <span class="input-group-btn">
-                      <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Todos <span class="fa fa-caret-down"></span></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#">Charla</a>
-                        </li>
-                        <li>
-                          <a href="#">Paseos</a>
-                        </li>
-                        <li>
-                          <a href="#">Actividad Social</a>
-                        </li>
-                      </ul>
+                      <select class="form-control">
+                        <option>Todos</option>
+                        <option *ngFor="#type of eventTypes" [value]="type">{{type.descripcion}}</option>
+                      </select>
                     </span>
                   </div>
-                  <div class="row" style="text-align: center; font-size: 15px;">
-                    <label class="checkbox-inline plainText">
-                      <input type="checkbox" value="" checked s>Pendientes</label>
-                    <label class="checkbox-inline plainText">
-                      <input type="checkbox" value="">Realizados</label>
-                  </div>
+                </div>
+                <div class="row" style="text-align: center; font-size: 15px;">
+                  <label class="checkbox-inline plainText">
+                    <input type="checkbox" value="" checked s>Pendientes</label>
+                  <label class="checkbox-inline plainText">
+                    <input type="checkbox" value="">Realizados</label>
                 </div>
               </div>
             </div>
@@ -49,8 +43,8 @@
                       <img src="images/reunion.png" class="img-circle img-responsive">
                     </div>
                     <div class="col-md-8">
-                      <h3>{{event.name}}</h3>
-                      <p style="color:black;" class="text-left">{{event.description}}</p>
+                      <h3>{{event.nombre}}</h3>
+                      <p style="color:black;" class="text-left">{{event.descripcion}}</p>
                     </div>
                   </div>
                 </div>

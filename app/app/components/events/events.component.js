@@ -25,28 +25,33 @@ System.register(['angular2/core', './event.service', 'angular2/router'], functio
             }],
         execute: function() {
             EventsComponent = (function () {
-                function EventsComponent(eventService, _router) {
-                    this.eventService = eventService;
+                function EventsComponent(_EventService, _router) {
+                    this._EventService = _EventService;
                     this._router = _router;
                     this.tempEvents = this.events;
                 }
                 EventsComponent.prototype.getEvents = function () {
                     var _this = this;
-                    this.eventService.getEvents().then(function (events) { return _this.events = events; }).then(function (tempEvents) { return _this.tempEvents = tempEvents; }).then(function (e) { return console.log(_this.events); });
+                    this._EventService.getEvents().subscribe(function (events) { _this.events = events; _this.tempEvents = events; }, function (error) { return _this.errorMessage = error; });
+                };
+                EventsComponent.prototype.getTypesEvents = function () {
+                    var _this = this;
+                    return this._EventService.getTypesEvents().toPromise().then(function (eventTypes) { return _this.eventTypes = eventTypes; }, function (error) { return _this.errorMessage = error; });
                 };
                 EventsComponent.prototype.ngOnInit = function () {
                     this.getEvents();
+                    this.getTypesEvents();
                 };
                 EventsComponent.prototype.search = function (term) {
                     if (term == "") {
                         this.tempEvents = this.events;
                     }
                     else {
-                        this.tempEvents = this.events.filter(function (event) { return event.name.includes(term); });
+                        this.tempEvents = this.events.filter(function (event) { return event.nombre.includes(term); });
                     }
                 };
                 EventsComponent.prototype.goToEvent = function (event) {
-                    this._router.navigate(['EventDetail', { id: event.name }]);
+                    this._router.navigate(['EventDetail', { id: event.codigo_evento }]);
                 };
                 EventsComponent.prototype.createEvent = function () {
                     this._router.navigate(['NewEvent']);

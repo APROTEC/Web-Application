@@ -16,7 +16,6 @@ export class AssociatesService {
                     .catch(this.handleError);
   }
   getAssociate(pAssociate:number) {
-    console.log(httpConfig.host+"personas/"+pAssociate.toString());
     return this.http.get(httpConfig.host+"personas/"+pAssociate.toString())
                     .map(res => res.json())
                     .catch(this.handleError);
@@ -34,7 +33,7 @@ export class AssociatesService {
     }
   getCanton(pCanton:number){
     return this.http.get(httpConfig.host+"cantones/"+pCanton)
-                    .map(res => <Canton>res.json())
+                    .map(res => <Canton[]>res.json())
                     .catch(this.handleError);
   }
   getShirtSizes(){
@@ -52,6 +51,11 @@ export class AssociatesService {
                     .map(res => <Department[]> res.json())
                     .catch(this.handleError);
   }
+  getSubDepartment(pSubDepartment:number){
+    return this.http.get(httpConfig.host+"sub_departamentos/"+pSubDepartment)
+                    .map(res => <SubDepartment[]> res.json())
+                    .catch(this.handleError);
+  }
   getSubDepartmentsbyDepartment(pDepartment:number){
     return this.http.get(httpConfig.host+"sub_departamentos/departamentos/"+pDepartment)
                     .map(res => <SubDepartment[]> res.json())
@@ -59,13 +63,19 @@ export class AssociatesService {
   }
 
   //-------------------------------------------------- Post ------------------------------------------------
-  addAssociate (name: string) : Observable<Associate>  {
+  createAssociate (nombre: string, apellidos:string, correo_institucional:string,nombre_usuario:string) : Observable<Associate>  {
 
-    let body = JSON.stringify({ name });
+    let body = JSON.stringify({ nombre,apellidos,correo_institucional,nombre_usuario });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(httpConfig.host+" ", body, options)
+    return this.http.post(httpConfig.host+"usuarios/"+body, body, options)
+                    .map(res =>  <Associate> res.json().data)
+                    .catch(this.handleError)
+  }
+  //------------------------------------------- Delete -----------------------------------
+  deleteAssociate(pAssociate:number) : Observable<Associate>{
+    return this.http.delete(httpConfig.host+"personas."+pAssociate)
                     .map(res =>  <Associate> res.json().data)
                     .catch(this.handleError)
   }
