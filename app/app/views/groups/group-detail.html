@@ -24,7 +24,7 @@
       <div class="section">
         <div class="container-fluid">
           <div class="col-md-4" style="margin-top:20px" *ngFor="#associate of _Associates">
-            <div class="jumbotron" style="padding:0px" (click)="goToAssociate(associate)">
+            <div class="jumbotron" style="padding:0px" >
               <div class="container" >
                 <div class="col-md-4" style="margin-top:10px" >
                   <a href="funcionario.html"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle img-responsive"></a>
@@ -33,8 +33,10 @@
                   <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button" (click)="removeMember(associate)">
                     <span class="glyphicon glyphicon-remove"></span>
                   </button>
+                  <a (click)="goToAssociate(associate)">
                     <h3 class="text-left" style="font-size:22px">{{associate.nombre}}</h3>
                     <p class="text-left" style="color:black; font-size:16px">{{associate.apellidos}}</p>
+                  </a>
                 </div>
               </div>
             </div>
