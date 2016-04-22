@@ -1,0 +1,55 @@
+<div class="section">
+  <div class="container-fluid">
+    <h2>Invitados
+      <a class="btn btn-primary" data-toggle="modal" data-target="#addAssociateModal" style="float: right;">Agregar funcionario</a>
+      <a class="btn btn-primary" data-toggle="modal" data-target="#GroupModal" style="float: right;margin-right:20px">Agregar grupo</a>
+    </h2>
+    <hr>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section">
+            <div class="col-md-offset-2 col-md-12">
+              <div class="col-md-6">
+                <input type="te xt" class="form-control" placeholder="Ingrese su búsqueda" #term (keyup)="search(term.value)">
+              </div>
+              <div class="col-md-2">
+                <span class="input-group-btn">
+                  <select class="form-control">
+                    <option>Todos</option>
+                    <option>Confirmados</option>
+                    <option>Por confirmar</option>
+                  </select>
+                </span>
+              </div>
+            </div>
+            </div>
+            <div class="section">
+              <div class="container-fluid">
+                <div class="col-md-4 "*ngFor="#associate of tempAssociates">
+                  <div class="jumbotron associateContainer" >
+                    <div class="container">
+                      <div class="col-md-4" style="margin-top:15px">
+                        <a><img src="images/user_placeholder.png" class="img-circle img-responsive"></a>
+                      </div>
+                      <div class="col-md-8">
+                        <button style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <a (click)="goToAssociate(associate)">
+                        <h3 class="text-left" style="font-size:22px">{{associate.nombre}}</h3>
+                        <p class="text-left" style="color:black; font-size:16px">{{associate.apellidos}}</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<groupAdd></groupAdd>
+<associateAdd></associateAdd>

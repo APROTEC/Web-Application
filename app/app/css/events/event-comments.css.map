@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,iBAAiB;EAKf,UAAU,EAAC,IAAI;EACf,YAAY,EAAE,KAAK;EACnB,WAAW,EAAC,GAAG;EACf,cAAc,EAAC,GAAG;EAClB,YAAY,EAAC,CAAC;EARd,qFAAU;IACR,KAAK,EAAC,KAAK",
-"sources": ["../../sass/events/event-comments.scss"],
-"names": [],
-"file": "event-comments.css"
-}

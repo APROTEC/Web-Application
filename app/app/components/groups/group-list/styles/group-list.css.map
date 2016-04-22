@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,qCAAI;EACF,KAAK,EAAC,KAAK",
+"sources": ["group-list.scss"],
+"names": [],
+"file": "group-list.css"
+}

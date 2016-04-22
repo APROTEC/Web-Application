@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,KAAK;EACH,KAAK,EAAC,KAAK",
-"sources": ["../../sass/associates/associate-detail.scss"],
-"names": [],
-"file": "associate-detail.css"
-}

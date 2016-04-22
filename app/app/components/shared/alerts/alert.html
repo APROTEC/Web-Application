@@ -1,0 +1,15 @@
+
+<div [ngSwitch]="message.typeMessage">
+  <div *ngSwitchWhen="'Danger'">
+    <div class = "alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+       <strong>Error: </strong>{{message.message}}
+    </div>
+  </div>
+  <div *ngSwitchWhen="'Success'">
+    <div class = "alert alert-success" role="alert">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+       {{message.message}}
+    </div>
+  </div>
+</div>

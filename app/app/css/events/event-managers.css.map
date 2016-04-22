@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,iBAAiB;EAKf,UAAU,EAAC,IAAI;EACf,YAAY,EAAE,KAAK;EACnB,OAAO,EAAC,GAAG;EANX,qFAAU;IACR,KAAK,EAAC,KAAK",
-"sources": ["../../sass/events/event-managers.scss"],
-"names": [],
-"file": "event-managers.css"
-}

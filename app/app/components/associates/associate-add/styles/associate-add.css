@@ -1,0 +1,46 @@
+.bodyContainer {
+  padding-left: 50px;
+  padding-right: 50px; }
+
+.suggest-holder {
+  width: 250px;
+  float: inherit;
+  z-index: 1500;
+  position: absolute;
+  background-color: white; }
+
+.suggest-holder input {
+  z-index: 1500; }
+
+.suggest-holder ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(0, 120, 0, 0.6);
+  z-index: 1500; }
+
+.suggest-holder li {
+  padding: 5px;
+  z-index: 1500; }
+
+.suggest-holder li:hover {
+  cursor: pointer;
+  z-index: 1500; }
+
+.suggest-holder li:hover, li.active {
+  background: rgba(0, 120, 0, 0.2);
+  z-index: 1500; }
+
+.suggest-name {
+  font-weight: bold;
+  display: block;
+  height: 15px;
+  z-index: 1500; }
+
+.suggest-description {
+  font-style: italic;
+  font-size: 11px;
+  color: #999;
+  z-index: 1500; }
+
+/*# sourceMappingURL=associate-add.css.map */
