@@ -26,6 +26,11 @@ export class GroupService {
                     .map(res => <Associate[]> res.json())
                     .catch(this.handleError);
   }
+  getCountMembers(pGroup:number){
+    return this.http.get(httpConfig.host+"/grupos/count_miembros/"+pGroup)
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
 
 
     //----------------------------------- Post -------------------------
@@ -63,13 +68,11 @@ export class GroupService {
   deleteMember (codigo_grupo:number,codigo_usuario:number) : Observable<Associate>  {
     return this.http.delete(httpConfig.host+"miembros_grupo/"+codigo_grupo+"-"+codigo_usuario)
                     .map(res =>  <Associate> res.json().data)
-                    .do(data => console.log(data))
                     .catch(this.handleError)
   }
   deleteGroup (codigo_grupo:number) : Observable<Group>  {
     return this.http.delete(httpConfig.host+"grupos/"+codigo_grupo)
                     .map(res =>  <Group> res.json().data)
-                    .do(data => console.log(data))
                     .catch(this.handleError)
   }
   private handleError (error: Response) {

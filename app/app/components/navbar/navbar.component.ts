@@ -16,7 +16,12 @@ import { GroupDetailComponent } from '../groups/group-detail/group-detail.compon
 
 import {AccountComponent} from '../managers/account/account.component';
 import {ManagersComponent} from '../managers/manager-list/manager-list.component';
-import {DocumentList} from '../documents/document-list.component';
+import {DocumentList} from '../documents/document-list/document-list.component';
+import {DocumentDetail} from '../documents/document-detail/document-detail.component';
+
+import {FormList} from '../forms/form-list/form-list.component';
+import {FormDetail} from '../forms/form-detail/form-detail.component';
+
 
 @Component({
   selector: 'navbar',
@@ -35,7 +40,12 @@ import {DocumentList} from '../documents/document-list.component';
   { path: '/group/:id', name:'GroupDetail', component: GroupDetailComponent},
   { path: '/account', name:'Account', component: AccountComponent},
   { path: '/managers', name:'Managers', component: ManagersComponent},
-  { path: '/documents', name:'Documents', component: DocumentList}
+  { path: '/documents', name:'Documents', component: DocumentList},
+  { path: '/documents/:id', name:'DocumentsDetail', component: DocumentDetail},
+  { path: '/forms', name:'Forms', component: FormList},
+  { path: '/forms/:id', name:'FormDetail', component: FormDetail}
+
+
 ])
 export class navbarComponent implements OnInit {
     isSuperUser:boolean = false;

@@ -30,7 +30,10 @@ export class EventNewComponent implements OnInit {
     onCreateEvent(){
       this._Event.fecha_hora = this._Event.fecha_hora.replace("T"," ");
       this._Event.fecha_hora = this._Event.fecha_hora+":00";
-      this._EventService.createEvent(this._Event.nombre,this._Event.lugar,this._Event.fecha_hora,this._Event.numero_maximo_acompanantes,this._Event.descripcion,1)
+      this._Event.fecha_limite_accion = this._Event.fecha_limite_accion.replace("T"," ");
+      this._Event.fecha_limite_accion = this._Event.fecha_limite_accion+":00";
+      this._EventService.createEvent(this._Event.nombre,this._Event.lugar,this._Event.fecha_hora,this._Event.numero_maximo_acompanantes,this._Event.descripcion,1,
+      this._Event.precio_entrada_asociados,this._Event.fecha_limite_accion)
       .subscribe(
         event => console.log(event),
         error => this.errorMessage = error

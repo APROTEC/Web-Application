@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/group.service', '../../events/services/event.service', '../../shared/alerts/alert.compononet'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../services/group.service', '../../events/services/event.service', '../../shared/alerts/alert.compononet', '../../documents/services/documents.service', '../../forms/services/form.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../services/group.service'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, group_service_1, event_service_1, alert_compononet_1;
+    var core_1, router_1, group_service_1, event_service_1, alert_compononet_1, documents_service_1, form_service_1;
     var GroupAddComponent;
     return {
         setters:[
@@ -28,57 +28,84 @@ System.register(['angular2/core', 'angular2/router', '../services/group.service'
             },
             function (alert_compononet_1_1) {
                 alert_compononet_1 = alert_compononet_1_1;
+            },
+            function (documents_service_1_1) {
+                documents_service_1 = documents_service_1_1;
+            },
+            function (form_service_1_1) {
+                form_service_1 = form_service_1_1;
             }],
         execute: function() {
             GroupAddComponent = (function () {
-                function GroupAddComponent(routeParams, _GroupService, location, _EventService) {
+                function GroupAddComponent(routeParams, _GroupService, _EventService, _DocumentsService, _FormsService) {
                     this.routeParams = routeParams;
                     this._GroupService = _GroupService;
-                    this.location = location;
                     this._EventService = _EventService;
-                    this.eventId = 0;
+                    this._DocumentsService = _DocumentsService;
+                    this._FormsService = _FormsService;
                     this.groupState = new Array();
-                    this.message = { message: "Los asociados han sido agregados",
+                    this.message = { message: "Los grupos han sido agregados con éxito",
                         typeMessage: "Success" };
                     this.showMsg = false;
-                    var tempLocation = location.path().substr(11);
-                    tempLocation = tempLocation.substr(0, tempLocation.indexOf('/'));
-                    this.eventId = +tempLocation;
                 }
                 GroupAddComponent.prototype.ngOnInit = function () {
                     this.getGroups();
                 };
-                GroupAddComponent.prototype.getGroups = function () {
-                    var _this = this;
-                    this._GroupService.getGroups().toPromise().then(function (groups) { return _this._Groups = groups; }, function (error) { return _this.errorMsg = error; }).then(function (groups) { return _this._Groups.forEach(function (g) { return g.state = false; }); });
-                };
                 GroupAddComponent.prototype.addGroups = function () {
                     var _this = this;
-                    this._Groups.forEach(function (g) {
-                        if (g.state == true) {
-                            _this.postGroup(_this.eventId, g.codigo_grupo);
-                        }
-                    });
-                    this.showMsg = true;
-                    setTimeout(function () { _this.showMsg = false; }, 5000);
+                    if (this.component.type == "Events") {
+                        this._Groups.forEach(function (g) { _this.postGroupEvent(_this.component.id, g.codigo_grupo); });
+                    }
+                    else if (this.component.type == "Documents") {
+                        this._Groups.forEach(function (g) { _this.postGroupDocument(_this.component.id, g.codigo_grupo); });
+                    }
+                    else if (this.component.type == "Forms") {
+                        this._Groups.forEach(function (g) { _this.postGroupForms(_this.component.id, g.codigo_grupo); });
+                    }
                 };
                 GroupAddComponent.prototype.changeState = function (pGroup) {
                     pGroup.state = !pGroup.state;
                 };
-                //------------ Post------------
-                GroupAddComponent.prototype.postGroup = function (pEvent, pGroup) {
+                //--------------------------- Gets --------------------------
+                GroupAddComponent.prototype.getGroups = function () {
                     var _this = this;
-                    return this._EventService.addGroup(pEvent, pGroup).subscribe(function (data) { return console.log(""); }, function (error) { return _this.errorMsg = error; });
+                    this._GroupService.getGroups().toPromise().then(function (groups) { return _this._Groups = groups; }, function (error) { }).then(function (groups) { return _this._Groups.forEach(function (g) { return g.state = false; }); });
+                    //---------------------------- Post----------------------------
                 };
+                GroupAddComponent.prototype.postGroupDocument = function (pDocument, pGroup) {
+                    var _this = this;
+                    return this._DocumentsService.addGroup(pDocument, pGroup).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
+                };
+                GroupAddComponent.prototype.postGroupEvent = function (pEvent, pGroup) {
+                    var _this = this;
+                    return this._EventService.addGroup(pEvent, pGroup).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
+                };
+                GroupAddComponent.prototype.postGroupForms = function (pForm, pGroup) {
+                    var _this = this;
+                    return this._FormsService.addGroup(pForm, pGroup).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
+                };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], GroupAddComponent.prototype, "component", void 0);
                 GroupAddComponent = __decorate([
                     core_1.Component({
                         selector: 'groupAdd',
                         templateUrl: 'app/components/groups/group-add/group-add.html',
                         inputs: ['group'],
                         directives: [alert_compononet_1.Alert],
-                        providers: [group_service_1.GroupService]
+                        providers: [group_service_1.GroupService, documents_service_1.DocumentsService, form_service_1.FormsService]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, group_service_1.GroupService, router_1.Location, event_service_1.EventService])
+                    __metadata('design:paramtypes', [router_1.RouteParams, group_service_1.GroupService, event_service_1.EventService, documents_service_1.DocumentsService, form_service_1.FormsService])
                 ], GroupAddComponent);
                 return GroupAddComponent;
             }());

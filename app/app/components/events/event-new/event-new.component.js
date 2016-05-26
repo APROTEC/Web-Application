@@ -46,7 +46,9 @@ System.register(['angular2/core', 'angular2/router', '../event/event', '../servi
                     var _this = this;
                     this._Event.fecha_hora = this._Event.fecha_hora.replace("T", " ");
                     this._Event.fecha_hora = this._Event.fecha_hora + ":00";
-                    this._EventService.createEvent(this._Event.nombre, this._Event.lugar, this._Event.fecha_hora, this._Event.numero_maximo_acompanantes, this._Event.descripcion, 1)
+                    this._Event.fecha_limite_accion = this._Event.fecha_limite_accion.replace("T", " ");
+                    this._Event.fecha_limite_accion = this._Event.fecha_limite_accion + ":00";
+                    this._EventService.createEvent(this._Event.nombre, this._Event.lugar, this._Event.fecha_hora, this._Event.numero_maximo_acompanantes, this._Event.descripcion, 1, this._Event.precio_entrada_asociados, this._Event.fecha_limite_accion)
                         .subscribe(function (event) { return console.log(event); }, function (error) { return _this.errorMessage = error; });
                     this.showMsg = true;
                     setTimeout(function () { _this.showMsg = false; _this._router.navigate(['Events']); }, 3000);

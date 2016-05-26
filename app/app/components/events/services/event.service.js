@@ -47,14 +47,44 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
-                EventService.prototype.getAssociates = function (pEvent) {
+                EventService.prototype.getInvitedAssociates = function (pEvent) {
                     return this.http.get(httpConfig_1.httpConfig.host + "eventos/lista_invitados/" + pEvent)
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                EventService.prototype.getConfirmedAssociates = function (pEvent) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "eventos/lista_confirmados/" + pEvent)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
+                EventService.prototype.getComments = function (pEvent) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "comentarios/" + pEvent)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
+                EventService.prototype.getCountInvitedAssociates = function (pEvent) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "usuarios_invitados/count_invitados/" + pEvent)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
+                EventService.prototype.getCountConfirmedAssociates = function (pEvent) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "usuarios_invitados/count_confirmados/" + pEvent)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
+                EventService.prototype.getCountAcompanantes = function (pEvent) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "usuarios_invitados/count_acompanantes/" + pEvent)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
+                EventService.prototype.getDocuments = function (pEvent) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "eventos_documentos/" + pEvent)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 //---------------------------------- Post ------------------------------
-                EventService.prototype.createEvent = function (nombre, lugar, fecha_hora, numero_maximo_acompanantes, descripcion, codigo_tipo_evento) {
-                    var body = JSON.stringify({ nombre: nombre, lugar: lugar, fecha_hora: fecha_hora, numero_maximo_acompanantes: numero_maximo_acompanantes, descripcion: descripcion, codigo_tipo_evento: codigo_tipo_evento });
+                EventService.prototype.createEvent = function (nombre, lugar, fecha_hora, numero_maximo_acompanantes, descripcion, codigo_tipo_evento, precio_entrada_asociados, fecha_limite_accion) {
+                    var body = JSON.stringify({ nombre: nombre, lugar: lugar, fecha_hora: fecha_hora, numero_maximo_acompanantes: numero_maximo_acompanantes, descripcion: descripcion, codigo_tipo_evento: codigo_tipo_evento, precio_entrada_asociados: precio_entrada_asociados, fecha_limite_accion: fecha_limite_accion });
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     return this.http.post(httpConfig_1.httpConfig.host + "eventos/" + body, body, options)
@@ -78,11 +108,20 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .catch(this.handleError);
                 };
                 //---------------------------------- Update ------------------------------
-                EventService.prototype.updateEvent = function (codigo_tipo_evento, nombre, lugar, fecha_hora, numero_maximo_acompanantes, descripcion) {
-                    var body = JSON.stringify({ nombre: nombre, lugar: lugar, fecha_hora: fecha_hora, numero_maximo_acompanantes: numero_maximo_acompanantes, descripcion: descripcion, codigo_tipo_evento: codigo_tipo_evento });
+                EventService.prototype.updateEvent = function (codigo_evento, nombre, lugar, fecha_hora, numero_maximo_acompanantes, descripcion, precio_entrada_asociados, fecha_limite_accion, codigo_tipo_evento) {
+                    var body = JSON.stringify({ codigo_evento: codigo_evento, nombre: nombre, lugar: lugar, fecha_hora: fecha_hora, numero_maximo_acompanantes: numero_maximo_acompanantes, descripcion: descripcion, codigo_tipo_evento: codigo_tipo_evento, precio_entrada_asociados: precio_entrada_asociados, fecha_limite_accion: fecha_limite_accion });
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     return this.http.put(httpConfig_1.httpConfig.host + "eventos/" + body, body, options)
+                        .map(function (res) { return res.json().data; })
+                        .catch(this.handleError);
+                };
+                //---------------------------------- Delete ------------------------------
+                EventService.prototype.deleteAssociate = function (codigo_evento, codigo_usuario) {
+                    var body = JSON.stringify({ codigo_evento: codigo_evento, codigo_usuario: codigo_usuario });
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    return this.http.delete(httpConfig_1.httpConfig.host + "usuarios_invitados/" + body, options)
                         .map(function (res) { return res.json().data; })
                         .catch(this.handleError);
                 };

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '../logIn/services/login.service', '../events/event-list/events.component', '../events/event-detail/event-detail.component', '../events/event-new/event-new.component', '../associates/associate-list/associates.component', '../associates/associate-detail/associate-detail.component', '../associates/associate-new/associate-new.component', '../groups/group-list/group-list.component', '../groups/group-detail/group-detail.component', '../managers/account/account.component', '../managers/manager-list/manager-list.component', '../documents/document-list.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '../logIn/services/login.service', '../events/event-list/events.component', '../events/event-detail/event-detail.component', '../events/event-new/event-new.component', '../associates/associate-list/associates.component', '../associates/associate-detail/associate-detail.component', '../associates/associate-new/associate-new.component', '../groups/group-list/group-list.component', '../groups/group-detail/group-detail.component', '../managers/account/account.component', '../managers/manager-list/manager-list.component', '../documents/document-list/document-list.component', '../documents/document-detail/document-detail.component', '../forms/form-list/form-list.component', '../forms/form-detail/form-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, router_2, core_2, login_service_1, events_component_1, event_detail_component_1, event_new_component_1, associates_component_1, associate_detail_component_1, associate_new_component_1, group_list_component_1, group_detail_component_1, account_component_1, manager_list_component_1, document_list_component_1;
+    var core_1, router_1, router_2, core_2, login_service_1, events_component_1, event_detail_component_1, event_new_component_1, associates_component_1, associate_detail_component_1, associate_new_component_1, group_list_component_1, group_detail_component_1, account_component_1, manager_list_component_1, document_list_component_1, document_detail_component_1, form_list_component_1, form_detail_component_1;
     var navbarComponent;
     return {
         setters:[
@@ -59,6 +59,15 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
             },
             function (document_list_component_1_1) {
                 document_list_component_1 = document_list_component_1_1;
+            },
+            function (document_detail_component_1_1) {
+                document_detail_component_1 = document_detail_component_1_1;
+            },
+            function (form_list_component_1_1) {
+                form_list_component_1 = form_list_component_1_1;
+            },
+            function (form_detail_component_1_1) {
+                form_detail_component_1 = form_detail_component_1_1;
             }],
         execute: function() {
             navbarComponent = (function () {
@@ -103,7 +112,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
                         { path: '/group/:id', name: 'GroupDetail', component: group_detail_component_1.GroupDetailComponent },
                         { path: '/account', name: 'Account', component: account_component_1.AccountComponent },
                         { path: '/managers', name: 'Managers', component: manager_list_component_1.ManagersComponent },
-                        { path: '/documents', name: 'Documents', component: document_list_component_1.DocumentList }
+                        { path: '/documents', name: 'Documents', component: document_list_component_1.DocumentList },
+                        { path: '/documents/:id', name: 'DocumentsDetail', component: document_detail_component_1.DocumentDetail },
+                        { path: '/forms', name: 'Forms', component: form_list_component_1.FormList },
+                        { path: '/forms/:id', name: 'FormDetail', component: form_detail_component_1.FormDetail }
                     ]), 
                     __metadata('design:paramtypes', [router_1.Router, core_2.CookieService])
                 ], navbarComponent);

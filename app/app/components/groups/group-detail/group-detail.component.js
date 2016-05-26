@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../group/group', '../../associates/associate-add/associate-add.component', '../services/group.service', '../../shared/alerts/alert.compononet'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../group/group', '../../associates/associate-add/associate-add.component', '../services/group.service', '../../shared/alerts/alert.compononet', '../../shared/loading/loading.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../group/group', '../../as
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, group_1, associate_add_component_1, group_service_1, alert_compononet_1;
+    var core_1, router_1, group_1, associate_add_component_1, group_service_1, alert_compononet_1, loading_component_1;
     var GroupDetailComponent;
     return {
         setters:[
@@ -31,17 +31,24 @@ System.register(['angular2/core', 'angular2/router', '../group/group', '../../as
             },
             function (alert_compononet_1_1) {
                 alert_compononet_1 = alert_compononet_1_1;
+            },
+            function (loading_component_1_1) {
+                loading_component_1 = loading_component_1_1;
             }],
         execute: function() {
             GroupDetailComponent = (function () {
                 function GroupDetailComponent(routeParams, _GroupService, _router) {
                     var _this = this;
+                    this.routeParams = routeParams;
                     this._GroupService = _GroupService;
                     this._router = _router;
                     this._Group = new group_1.Group();
+                    this.isLoading = true;
                     this.message = { message: "El asociado ha sido removido del grupo",
                         typeMessage: "Success" };
                     this.showMsg = false;
+                    this.component = { type: "Groups",
+                        id: +this.routeParams.get('id') };
                     this.groupId = +routeParams.get('id');
                     setInterval(function () { _this.getMembers(_this.groupId); }, 1000);
                 }
@@ -63,7 +70,7 @@ System.register(['angular2/core', 'angular2/router', '../group/group', '../../as
                 };
                 GroupDetailComponent.prototype.getMembers = function (pGroup) {
                     var _this = this;
-                    this._GroupService.getMembers(pGroup).subscribe(function (associates) { _this._Associates = associates; });
+                    this._GroupService.getMembers(pGroup).retry(3).subscribe(function (associates) { _this._Associates = associates; }, function (error) { }, function () { _this.isLoading = false; });
                 };
                 //-------------------- Updates ----------------
                 GroupDetailComponent.prototype.updateGroup = function (pGroup) {
@@ -85,8 +92,13 @@ System.register(['angular2/core', 'angular2/router', '../group/group', '../../as
                 };
                 GroupDetailComponent.prototype.deleteGroup = function () {
                     var _this = this;
-                    this._GroupService.deleteGroup(this.groupId).toPromise().then(function (associate) { return console.log("associate"); }, function (error) { return _this.errorMsg = error; });
-                    this._router.navigate(['Groups']);
+                    this._GroupService.deleteGroup(this.groupId).toPromise().then(function (associate) { return console.log("associate"); }, function (error) { return _this.errorMsg = error; }).then(function () {
+                        _this.message.message = "El asociado ha sido removido del grupo";
+                        _this.message.typeMessage = "Success";
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                        _this._router.navigate(['Groups']);
+                    });
                 };
                 GroupDetailComponent = __decorate([
                     core_1.Component({
@@ -94,7 +106,7 @@ System.register(['angular2/core', 'angular2/router', '../group/group', '../../as
                         templateUrl: 'app/components/groups/group-detail/group-detail.html',
                         styleUrls: ['app/components/groups/group-detail/styles/group-detail.css'],
                         inputs: ['group'],
-                        directives: [associate_add_component_1.AssociateAddComponent, alert_compononet_1.Alert],
+                        directives: [associate_add_component_1.AssociateAddComponent, alert_compononet_1.Alert, loading_component_1.LoadingComponent],
                         providers: [group_service_1.GroupService]
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, group_service_1.GroupService, router_1.Router])

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../group-new/group-new.component', '../services/group.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../group-new/group-new.component', '../services/group.service', '../../shared/loading/loading.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../group-new/group-new.com
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, group_new_component_1, group_service_1;
+    var core_1, router_1, group_new_component_1, group_service_1, loading_component_1;
     var GroupsComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', 'angular2/router', '../group-new/group-new.com
             },
             function (group_service_1_1) {
                 group_service_1 = group_service_1_1;
+            },
+            function (loading_component_1_1) {
+                loading_component_1 = loading_component_1_1;
             }],
         execute: function() {
             GroupsComponent = (function () {
@@ -36,9 +39,12 @@ System.register(['angular2/core', 'angular2/router', '../group-new/group-new.com
                     this.tempGroups = new Array();
                     this.searchTerm = "";
                     this.isSearchEmpty = true;
-                    setInterval(function () {
-                        _this.getGroups();
-                    }, 1000);
+                    this.isLoading = true;
+                    setTimeout(function () {
+                        setInterval(function () {
+                            _this.getGroups();
+                        }, 1000);
+                    }, 5000);
                 }
                 GroupsComponent.prototype.ngOnInit = function () {
                     this.getGroups();
@@ -51,12 +57,12 @@ System.register(['angular2/core', 'angular2/router', '../group-new/group-new.com
                 };
                 GroupsComponent.prototype.getGroups = function () {
                     var _this = this;
-                    return this._GroupService.getGroups().subscribe(function (groups) {
+                    return this._GroupService.getGroups().retry(3).subscribe(function (groups) {
                         _this.groups = groups;
                         if (_this.isSearchEmpty) {
                             _this.tempGroups = groups;
                         }
-                    }, function (error) { return _this.errorMessage = error; });
+                    }, function (error) { return _this.errorMessage = error; }, function () { _this.isLoading = false; });
                 };
                 GroupsComponent.prototype.search = function (term) {
                     if (term == "") {
@@ -73,7 +79,7 @@ System.register(['angular2/core', 'angular2/router', '../group-new/group-new.com
                         selector: 'groups',
                         templateUrl: 'app/components/groups/group-list/group-list.html',
                         styleUrls: ['app/components/groups/group-list/styles/group-list.css'],
-                        directives: [group_new_component_1.GroupNewComponent],
+                        directives: [group_new_component_1.GroupNewComponent, loading_component_1.LoadingComponent],
                         providers: [group_service_1.GroupService]
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, group_service_1.GroupService])

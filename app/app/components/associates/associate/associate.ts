@@ -1,23 +1,25 @@
 export class Associate{
-  public codigo_informacion_persona:number;
-  public nombre:string;
-  public apellidos:string;
-  public fecha_nacimiento:string;
-  //public foto:string;
-  public correo_personal:string;
+  public codigo_informacion_persona:number = 0;
+  public nombre:string = " ";
+  public apellidos:string = " ";
+  public fecha_nacimiento:string = " ";
+  public correo_personal:string = " ";
   public talla_camisa:ShirtSize;
-  public cargo_jefatura:boolean;
-  public vegetariano:boolean;
+  public cargo_jefatura:boolean = false;
+  public vegetariano:boolean = false;
   public provincia:Province;
   public sede:Sede;
   public canton:Canton;
   public departamento:Department;
   public sub_departamento:SubDepartment;
-  public cedula:number;
-  public correo_institucional:string;
-  public telefono_trabajo:string;
-  public numero_extension:string;
-  constructor(){}
+  public cedula:number = 0;
+  public correo_institucional:string = " ";
+  public telefono_trabajo:string = " ";
+  public numero_extension:string = " ";
+  public foto:string;
+  constructor(){
+    this.talla_camisa = new ShirtSize(" ")
+  }
 }
 export class Province{
   public codigo_provincia:number;

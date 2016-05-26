@@ -1,0 +1,49 @@
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
+  <div class="container-fluid">
+    <h2>Documentos
+      <a class="btn btn-primary" style="float: right;" href="app/components/angular/document-add.html"><span class="glyphicon glyphicon-upload"></span> Agregar documento</a>
+    </h2>
+    <hr>
+    <div class="container-fluid">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class = "container-fluid">
+            <div class = "col-md-3">
+              <h4 class="list-group-item-heading">Nombre</h4>
+            </div>
+            <div class = "col-md-7">
+              <h4 class="list-group-item-heading">Descripción</h4>
+            </div>
+            <div class = "col-md-1">
+              <h4 class="list-group-item-heading">Descargar</h4>
+            </div>
+            <div class = "col-md-1">
+              <h4 class="list-group-item-heading">Borrar</h4>
+            </div>
+          </div>
+        </li>
+        <a class="list-group-item" *ngFor="#document of _Documents">
+          <div class = "container-fluid">
+            <div class = "col-md-3" >
+              <a style="color:black; "(click) = "goToDocument(document)"><h4 class="list-group-item-text">{{document.nombre_acta}}</h4></a>
+            </div>
+            <div class = "col-md-7">
+              <a style="color:black; "(click) = "goToDocument(document)"><h5 class="list-group-item-text">{{document.descripcion_acta}}</h5></a>
+            </div>
+            <div class = "col-md-1">
+              <button type="button" class="btn btn-primary" style="float:right;" (click)="downloadDocument(document)">
+                <span class="glyphicon glyphicon-download-alt"></span>
+              </button>
+            </div>
+            <div class = "col-md-1">
+              <button class="btn btn-danger" style="float: right;" type="button" (click)="deleteDocument(document)"><span class="glyphicon glyphicon-trash" ></span></button>
+            </div>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
+<loading *ngIf="isLoading"></loading>
+<documentAdd></documentAdd>
+<Alert *ngIf="showMsg" [message]="message"></Alert>

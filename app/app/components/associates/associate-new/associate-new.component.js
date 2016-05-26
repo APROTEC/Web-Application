@@ -27,7 +27,7 @@ System.register(['angular2/core', '../services/associate.service', '../../shared
             AssociateNewComponent = (function () {
                 function AssociateNewComponent(_AssociatesService) {
                     this._AssociatesService = _AssociatesService;
-                    this.message = { message: "Usuario creado",
+                    this.message = { message: "Usuario creado con éxito",
                         typeMessage: "Success" };
                     this.showMsg = false;
                 }

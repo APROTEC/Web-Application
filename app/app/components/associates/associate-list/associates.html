@@ -1,28 +1,26 @@
-<div class="section">
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
   <div class="container-fluid" >
     <div class="col-md-2 filter-column">
       <div class="jumbotron filterContainer">
         <h3 style="text-align:center">Filtros</h3>
         <hr><br>
-        <p>Provincia</p>
-        <div class="checkbox">
-          <label><input type="checkbox" value="">Heredia</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value="">San José</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value="">Cartago</label>
-        </div>
+        <label class="control-label" for="headquarters">Sede</label>
+        <select #sedeSelect class="form-control" (change) = "onSedeChanged(sedeSelect.value)">
+          <option [value]="-1" selected>Todos</option>
+          <option *ngFor="#sede of sedes" [value]="sede.codigo_sede">{{sede.nombre_sede}}</option>
+        </select>
         <br>
-        <p>Sexo</p>
-        <div class="checkbox">
-          <label><input type="checkbox" value="">Hombre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value="">Mujer</label>
-        </div>
-
+        <label class="control-label" for="departmentName">Departamento</label>
+        <select #departmentSelect class="form-control" (change) = "onDepartmentChanged(departmentSelect.value)">
+          <option [value]="-1" selected>Todos</option>
+          <option *ngFor="#department of departments" [value]="department.codigo_departamento">{{department.nombre_departamento}}</option>
+        </select>
+        <br>
+        <label class="control-label" for="departmentName">Subdepartamento</label>
+        <select #subDepartmentSelect class="form-control" (change) = "onSubDepartmentChanged(subDepartmentSelect.value)">
+          <option [value]="-1" selected></option>
+          <option *ngFor="#subDepartment of subDepartments" [value]="subDepartment.codigo_sub_departamento">{{subDepartment.nombre_sub_departamento}}</option>
+        </select>
       </div>
     </div>
     <div class="col-md-10" style="padding-left:0px; padding-right:50px">
@@ -38,14 +36,20 @@
           </div>
           <div class="row text-center">
             <div class="container" style="max-width:600">
-              <input type="search" placeholder="Ingrese su búsqueda" style="float: center;text-align:center;" class="form-control" #term (keyup)="searchAssociates(term.value)">
+              <input  [(ngModel)]="searchTerm"  type="search" placeholder="Ingrese su búsqueda" style="float: center;text-align:center;" class="form-control" #term (keyup)="onStateChanged()">
             </div>
+          </div>
+          <div class="row">
+            <center>
+              <a class="btn btn-success" (click)="exportExcel()" style="float: right; margin-right:30px">Exportar excel</a>
+            </center>
           </div>
         </div>
         <div class="container-fluid">
           <div class="col-md-12">
             <div class="section">
               <div class="container-fluid">
+                <p>Mostrando {{tempAssociates.length}} resultados</p>
                 <div *ngFor="#associate of tempAssociates" class="col-md-3">
                   <div class="section">
                     <div class="container-fluid associateContainer" >
@@ -63,4 +67,5 @@
     </div>
   </div>
 </div>
+<loading *ngIf="isLoading"></loading>
 <associateNew></associateNew>

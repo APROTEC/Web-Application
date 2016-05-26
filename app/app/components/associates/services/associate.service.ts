@@ -76,9 +76,9 @@ export class AssociatesService {
   //-------------------------------------------------- Update ---------------------------------------------
   updateAssociate (codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano,
   codigo_sede, codigo_canton, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension) : Observable<Associate>  {
-
     let body = JSON.stringify({ codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano,
     codigo_sede, codigo_canton, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension });
+    console.log(body)
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(httpConfig.host+"personas/"+body, body, options)
@@ -87,7 +87,7 @@ export class AssociatesService {
   }
   //------------------------------------------- Delete -----------------------------------
   deleteAssociate(pAssociate:number) : Observable<Associate>{
-    return this.http.delete(httpConfig.host+"personas."+pAssociate)
+    return this.http.delete(httpConfig.host+"usuarios/"+pAssociate)
                     .map(res =>  <Associate> res.json().data)
                     .catch(this.handleError)
   }

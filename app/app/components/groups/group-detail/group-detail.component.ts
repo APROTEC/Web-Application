@@ -5,6 +5,7 @@ import {AssociateAddComponent} from '../../associates/associate-add/associate-ad
 import {GroupService} from '../services/group.service'
 import {Associate} from '../../associates/associate/associate';
 import {Alert} from '../../shared/alerts/alert.compononet';
+import {LoadingComponent} from '../../shared/loading/loading.component';
 
 
 
@@ -13,7 +14,7 @@ import {Alert} from '../../shared/alerts/alert.compononet';
   templateUrl: 'app/components/groups/group-detail/group-detail.html',
   styleUrls:['app/components/groups/group-detail/styles/group-detail.css'],
   inputs : ['group'],
-  directives:[AssociateAddComponent,Alert],
+  directives:[AssociateAddComponent,Alert,LoadingComponent],
   providers:[GroupService]
 })
 
@@ -22,17 +23,20 @@ import {Alert} from '../../shared/alerts/alert.compononet';
 export class GroupDetailComponent implements OnInit{
     _Group = new Group();
     _Associates : Associate[];
+    isLoading = true;
     groupId:number;
     errorMsg:string;
     message = { message:"El asociado ha sido removido del grupo",
                 typeMessage: "Success" };
     showMsg = false;
     groupNameUpdated:string
+    component = { type:"Groups",
+                id: +this.routeParams.get('id')};
     ngOnInit(){
       this.getGroup(this.groupId);
       this.getMembers(this.groupId);
     }
-    constructor(routeParams: RouteParams, private _GroupService:GroupService, private _router:Router) {
+    constructor(private routeParams: RouteParams, private _GroupService:GroupService, private _router:Router) {
         this.groupId = +routeParams.get('id');
         setInterval(() =>
         {this.getMembers(this.groupId)},1000)
@@ -51,7 +55,11 @@ export class GroupDetailComponent implements OnInit{
       this._GroupService.getGroup(pGroup).toPromise().then(group => this._Group = group[0]);
     }
     getMembers(pGroup:number){
-      this._GroupService.getMembers(pGroup).subscribe(associates => {this._Associates = associates});
+      this._GroupService.getMembers(pGroup).retry(3).subscribe(
+        associates => {this._Associates = associates},
+        error => {},
+        () => {this.isLoading = false;}
+      );
     }
 
     //-------------------- Updates ----------------
@@ -77,8 +85,13 @@ export class GroupDetailComponent implements OnInit{
       this._GroupService.deleteGroup(this.groupId).toPromise().then(
         associate => console.log("associate"),
         error => this.errorMsg = error
-      );
-     this._router.navigate(['Groups']);
+      ).then( () => {
+        this.message.message = "El asociado ha sido removido del grupo";
+        this.message.typeMessage = "Success";
+        this.showMsg = true;
+        setTimeout( ()=>   {this.showMsg = false},5000 )
+        this._router.navigate(['Groups']);
+      })
 
     }
 }

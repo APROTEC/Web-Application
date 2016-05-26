@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../event-info/event-info.component', '../event-guests/event-guests.component', '../event-managers/event-managers.component', '../event-documents/event-documents.component', '../event-comments/event-comments.component', '../event/event', '../services/event.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../event-info/event-info.component', '../event-guests/event-guests.component', '../event-managers/event-managers.component', '../event-documents/event-document-list/event-documents.component', '../event-comments/event-comments.component', '../event/event', '../services/event.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -49,11 +49,13 @@ System.register(['angular2/core', 'angular2/router', '../event-info/event-info.c
                     this._router = _router;
                     this._EventService = _EventService;
                     this._Event = new event_1.Event();
+                    this._Comments = new Array();
                     this.eventId = +routeParams.get('id');
                 }
                 EventDetailComponent.prototype.ngOnInit = function () {
                     this.eventId = +this.routeParams.get('id');
                     this.getEvent(this.eventId);
+                    this.getComments();
                 };
                 EventDetailComponent.prototype.isRouteActive = function (pRoute) {
                     var instruction = this._router.generate([pRoute]);
@@ -61,7 +63,11 @@ System.register(['angular2/core', 'angular2/router', '../event-info/event-info.c
                 };
                 EventDetailComponent.prototype.getEvent = function (pEvent) {
                     var _this = this;
-                    this._EventService.getEvent(pEvent).subscribe(function (event) { return _this._Event = event[0]; }, function (error) { return _this.erroMsg = error; });
+                    this._EventService.getEvent(pEvent).retry(3).subscribe(function (event) { return _this._Event = event[0]; }, function (error) { return _this.erroMsg = error; });
+                };
+                EventDetailComponent.prototype.getComments = function () {
+                    var _this = this;
+                    this._EventService.getComments(this.eventId).retry(3).subscribe(function (comments) { _this._Comments = comments; }, function (error) { }, function () { });
                 };
                 EventDetailComponent = __decorate([
                     core_1.Component({

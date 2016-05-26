@@ -1,4 +1,3 @@
-
 import {Injectable} from 'angular2/core';
 import {httpConfig} from '../../shared/httpConfig/httpConfig';
 import {Http, Response,Headers, RequestOptions} from 'angular2/http';
@@ -25,7 +24,9 @@ export class LogInService {
 }
 
 export function isLoggedIn(){
-  let cookieService:CookieService = new CookieService();
-  let userName:string = cookieService.get("userName");
-  return !userName=="";
+  //let cookieService:CookieService = new CookieService();
+  //let userName:string = cookieService.get("userName");
+  //return !userName=="";
+  return true;
+
 }

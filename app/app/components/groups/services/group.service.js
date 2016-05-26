@@ -47,6 +47,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                GroupService.prototype.getCountMembers = function (pGroup) {
+                    return this.http.get(httpConfig_1.httpConfig.host + "/grupos/count_miembros/" + pGroup)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 //----------------------------------- Post -------------------------
                 GroupService.prototype.createGroup = function (descripcion_grupo) {
                     var body = JSON.stringify({ descripcion_grupo: descripcion_grupo });
@@ -78,13 +83,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                 GroupService.prototype.deleteMember = function (codigo_grupo, codigo_usuario) {
                     return this.http.delete(httpConfig_1.httpConfig.host + "miembros_grupo/" + codigo_grupo + "-" + codigo_usuario)
                         .map(function (res) { return res.json().data; })
-                        .do(function (data) { return console.log(data); })
                         .catch(this.handleError);
                 };
                 GroupService.prototype.deleteGroup = function (codigo_grupo) {
                     return this.http.delete(httpConfig_1.httpConfig.host + "grupos/" + codigo_grupo)
                         .map(function (res) { return res.json().data; })
-                        .do(function (data) { return console.log(data); })
                         .catch(this.handleError);
                 };
                 GroupService.prototype.handleError = function (error) {

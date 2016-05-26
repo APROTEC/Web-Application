@@ -16,7 +16,7 @@ export class AssociateNewComponent {
     lastNames:string;
     email:string;
     errorMsg:string;
-    message = { message:"Usuario creado",
+    message = { message:"Usuario creado con éxito",
                 typeMessage: "Success" };
     showMsg = false;
 

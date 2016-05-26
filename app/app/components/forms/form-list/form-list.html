@@ -1,0 +1,42 @@
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
+  <div class="container-fluid">
+    <h2>Encuestas
+      <a class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#addFormModal" ><span class="glyphicon glyphicon-upload"></span> Agregar encuesta</a>
+    </h2>
+    <hr>
+    <div class="container-fluid">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class = "container-fluid">
+            <div class = "col-md-3">
+              <h4 class="list-group-item-heading">Nombre</h4>
+            </div>
+            <div class = "col-md-7">
+              <h4 class="list-group-item-heading">Link</h4>
+            </div>
+            <div class = "col-md-2">
+              <h4 class="list-group-item-heading" style="float:right">Borrar</h4>
+            </div>
+          </div>
+        </li>
+        <a class="list-group-item" *ngFor="#form of _Forms">
+          <div class = "container-fluid">
+            <div class = "col-md-3" >
+              <a style="color:black; "(click) = "goToForm(form)"><h4 class="list-group-item-text">{{form.nombre_encuesta}}</h4></a>
+            </div>
+            <div class = "col-md-7">
+              <a style="color:black; " href = "{{form.link_encuesta}}"><h5 class="list-group-item-text">{{form.link_encuesta}}</h5></a>
+            </div>
+            <div class = "col-md-2">
+              <button class="btn btn-danger" style="float: right;" type="button" (click)="deleteDocument(form)"><span class="glyphicon glyphicon-trash" ></span></button>
+            </div>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
+<loading *ngIf="isLoading"></loading>
+<documentAdd></documentAdd>
+<Alert *ngIf="showMsg" [message]="message"></Alert>
+<formAdd></formAdd>

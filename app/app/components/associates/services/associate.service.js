@@ -96,6 +96,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                 AssociatesService.prototype.updateAssociate = function (codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano, codigo_sede, codigo_canton, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension) {
                     var body = JSON.stringify({ codigo_informacion_persona: codigo_informacion_persona, correo_personal: correo_personal, fecha_nacimiento: fecha_nacimiento, codigo_talla_camisa: codigo_talla_camisa, cargo_jefatura: cargo_jefatura, vegetariano: vegetariano,
                         codigo_sede: codigo_sede, codigo_canton: codigo_canton, codigo_sub_departamento: codigo_sub_departamento, correo_institucional: correo_institucional, telefono_trabajo: telefono_trabajo, numero_extension: numero_extension });
+                    console.log(body);
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
                     return this.http.put(httpConfig_1.httpConfig.host + "personas/" + body, body, options)
@@ -104,7 +105,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                 };
                 //------------------------------------------- Delete -----------------------------------
                 AssociatesService.prototype.deleteAssociate = function (pAssociate) {
-                    return this.http.delete(httpConfig_1.httpConfig.host + "personas." + pAssociate)
+                    return this.http.delete(httpConfig_1.httpConfig.host + "usuarios/" + pAssociate)
                         .map(function (res) { return res.json().data; })
                         .catch(this.handleError);
                 };

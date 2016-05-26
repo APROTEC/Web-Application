@@ -1,0 +1,87 @@
+<div class="section" [style.opacity]="isPageLoading ? '0' : '1' ">
+  <div class="container-fluid">
+    <h2>Documento {{_Document.nombre_acta}}
+      <a class="btn btn-primary" style="margin-left: 10px;" (click)="onEditData()"><span class="glyphicon glyphicon-pencil"></span></a>
+    </h2>
+    <div class="container-fluid">
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="jumbotron">
+            <div class="section">
+              <div class="container">
+                <form role="form" (ngSubmit)="onSubmitData()" #DocumentDataForm="ngForm">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label" for="name">Nombre</label>
+                        <input class="form-control" type="text" [readonly]="!isEditingData" [(ngModel)]="_Document.nombre_acta" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label" for="descripcion">Descripcion</label>
+                        <input class="form-control" type="text" [readonly]="!isEditingData" [(ngModel)]="_Document.descripcion_acta" required>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="btn btn-danger" style="float: right;margin-left: 15px;" (click)="onCancelData()" [style.display]="isEditingData ? '' : 'None'" >Cancelar</a>
+                  <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingData ? '' : 'None'" >Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid">
+    <div class="section">
+      <h2>Asociados
+        <a class="btn btn-primary" data-toggle="modal" data-target="#addAssociateModal" style="float: right;">Agregar funcionario</a>
+        <a class="btn btn-primary" data-toggle="modal" data-target="#GroupModal" style="float: right;margin-right:20px">Agregar grupo</a>
+      </h2>
+      <hr>
+      <div class="container-fluid">
+        <div class="col-md-12">
+          <div class="section">
+            <div class="col-md-12">
+              <div class="col-md-offset-2 col-md-8">
+                <input type="text" class="form-control" placeholder="Ingrese su búsqueda" [(ngModel)]="searchTerm" #term (keyup)="onStateChanged()">
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="container-fluid">
+              <p>Mostrando {{tempAssociates.length}} resultados</p>
+              <div class="col-md-4 "*ngFor="#associate of tempAssociates">
+                <div class="jumbotron documentContainer" >
+                  <div class="container">
+                    <div class="col-md-4" style="margin-top:15px">
+                      <a (click)="goToAssociate(associate)"><img src="http://{{associate.foto}}" class="img-circle img-responsive" style="width:70px; height:70px"></a>
+                    </div>
+                    <div class="col-md-8">
+                      <button (click)="removeAssociate(associate.codigo_usuario)" style="float:right; margin-top:10px;margin-right:-15px;;" class="btn btn-default btn-sm" type="button">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </button>
+                      <a (click)="goToAssociate(associate)">
+                        <h3 class="text-left" style="font-size:22px">{{associate.nombre}}</h3>
+                        <p class="text-left" style="color:black; font-size:16px">{{associate.apellidos}}</p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<loading *ngIf="isPageLoading"></loading>
+<associateAdd [component]="component"></associateAdd>
+<groupAdd [component]="component"></groupAdd>
+<Alert *ngIf="showMsg" [message]="message"></Alert>

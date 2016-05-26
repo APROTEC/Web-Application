@@ -13,17 +13,14 @@
           <li [class.active]="isRouteActive('Events')">
             <a [routerLink]="['Events']">Eventos</a>
           </li>
-          <li [class.active]="isRouteActive('Associates')">
-            <a [routerLink]="['Associates']">Asociados</a>
-          </li>
           <li [class.active]="isRouteActive('Groups')">
             <a [routerLink]="['Groups']">Grupos</a>
           </li>
-          <li>
-            <a href="#">Cuotas</a>
+          <li [class.active]="isRouteActive('Associates')">
+            <a [routerLink]="['Associates']">Asociados</a>
           </li>
-          <li>
-            <a href="#">Encuestas</a>
+          <li [class.active]="isRouteActive('Forms')">
+            <a [routerLink]="['Forms']">Encuestas</a>
           </li>
           <li [class.active]="isRouteActive('Documents')">
             <a [routerLink]="['Documents']">Documentos</a>

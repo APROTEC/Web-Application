@@ -13,9 +13,10 @@ System.register(['angular2/core', '../../shared/httpConfig/httpConfig', 'angular
     var core_1, httpConfig_1, http_1, Observable_1, core_2;
     var LogInService;
     function isLoggedIn() {
-        var cookieService = new core_2.CookieService();
-        var userName = cookieService.get("userName");
-        return !userName == "";
+        //let cookieService:CookieService = new CookieService();
+        //let userName:string = cookieService.get("userName");
+        //return !userName=="";
+        return true;
     }
     exports_1("isLoggedIn", isLoggedIn);
     return {

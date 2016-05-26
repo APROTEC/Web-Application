@@ -20,6 +20,9 @@
             <label class="control-label" for="password">Contraseña</label>
             <input class="form-control" placeholder="Contraseña" type="password" [(ngModel)]="actualUser.contrasena" required>
           </div>
+          <div class="form-group">
+            <a data-toggle="modal" data-target="#passwordResetModal"><label class="control-label" style="font-size:13px">Recuperar contraseña</label></a>
+          </div>
           <center>
             <button type="submit" class="btn btn-primary">Ingresar</button>
           </center>
@@ -30,3 +33,5 @@
   </div> <!-- ends container-->
 </div> <!-- ends section -->
 <Alert *ngIf="showAlertMsg" [message]="alertMessage"></Alert>
+<loading *ngIf="isLoading || isPageLoading"></loading>
+<passwordResetModal></passwordResetModal>

@@ -1,10 +1,12 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router, RouteParams, Location} from 'angular2/router';
+import {Component, OnInit, Input} from 'angular2/core';
+import {Router, RouteParams} from 'angular2/router';
 
 import {Associate} from '../associate/associate';
 import {AssociatesService} from '../services/associate.service';
 import {GroupService} from '../../groups/services/group.service';
 import {EventService} from '../../events/services/event.service';
+import {DocumentsService} from '../../documents/services/documents.service'
+import {FormsService} from '../../forms/services/form.service';
 import {Alert} from '../../shared/alerts/alert.compononet';
 
 
@@ -14,66 +16,52 @@ import {Alert} from '../../shared/alerts/alert.compononet';
   templateUrl:'app/components/associates/associate-add/associate-add.html',
   styleUrls: ['app/components/associates/associate-add/styles/associate-add.css'],
   directives:[Alert],
-  providers : [AssociatesService]
+  providers : [AssociatesService,DocumentsService,FormsService, GroupService, EventService]
 })
 
 
 export class AssociateAddComponent implements OnInit{
+    @Input() component;
     tempAssociates : Associate[];
     _Associates : Associate[];
 
     associatesToAdd = new Array<Associate>();
 
-    groupId:number=0;
-    eventId:number=0;
-    isGroup = false;
-    isEvent = false;
-    errorMsg :string ;
     message = { message:"Asociados agregados con éxito",
                 typeMessage: "Success" };
     showMsg = false;
     ngOnInit(){
       this.getAssociates();
     }
-    constructor(routeParams: RouteParams,private _router:Router, private _AssociatesService:AssociatesService, private _GroupService:GroupService
-    ,private _EventService:EventService,private location:Location) {
-      if(_router.hostComponent.name == "GroupDetailComponent"){
-         this.groupId = +routeParams.get('id');
-         this.isGroup = true;
-      }else{
-        let tempLocation = location.path().substr(11);
-        tempLocation = tempLocation.substr(0,tempLocation.indexOf('/'))
-        this.eventId = +tempLocation
-        this.isEvent = true;
-      }
-    }
+    constructor(routeParams: RouteParams,private _router:Router,
+    private _AssociatesService:AssociatesService, private _GroupService:GroupService,private _EventService:EventService, private _DocumentService:DocumentsService,
+    private _FormsService:FormsService) {}
     closeModal(){
       this.associatesToAdd = new Array<Associate>();
     }
     addAssociates(){
-      if(this.isGroup){
-        console.log("grupo")
-        this.associatesToAdd.forEach(a => this.postAssociateGroup(this.groupId,a.codigo_informacion_persona));
-        //this._router.navigateByUrl("http://localhost:3000/app/group/"+this.groupId);
-      }else{
-        console.log("evento")
-        this.associatesToAdd.forEach(a => this.postAssociateEvent(this.eventId,a.codigo_informacion_persona));
-        //this._router.navigateByUrl("http://localhost:3000/app/event/"+this.groupId);
+      if(this.component.type == "Events"){
+        this.associatesToAdd.forEach(a => this.postAssociateEvent(this.component.id,a.codigo_informacion_persona));
+      }else if(this.component.type == "Groups"){
+        this.associatesToAdd.forEach(a => this.postAssociateGroup(this.component.id,a.codigo_informacion_persona));
+      }else if(this.component.type == "Documents"){
+        this.associatesToAdd.forEach(a => this.postAssociateDocument(this.component.id,a.codigo_informacion_persona));
+      }else if(this.component.type == "Forms"){
+        this.associatesToAdd.forEach(a => this.postAssociateForm(this.component.id,a.codigo_informacion_persona));
       }
-      this.showMsg = true;
-      setTimeout( ()=>   {this.showMsg = false},5000 )
-    }
+
+    };
+
     addTempAssociate(pAssociate:Associate){
       if (!this.associatesToAdd.find(i => i.codigo_informacion_persona==pAssociate.codigo_informacion_persona)){
         this.associatesToAdd.push(pAssociate);
       }
-
     }
     search(pTerm:string){
       if (pTerm ==""){
           this.tempAssociates = new Array<Associate>() ;
       }else{
-          this.tempAssociates = this._Associates.filter(associate => associate.nombre.toLowerCase().startsWith(pTerm.toLowerCase())).splice(0,3);
+          this.tempAssociates = this._Associates.filter(associate => (associate.nombre+" "+associate.apellidos+" "+associate.cedula).toLowerCase().includes(pTerm.toLowerCase())).splice(0,4);
       }
     }
 
@@ -81,19 +69,47 @@ export class AssociateAddComponent implements OnInit{
     //-------------------------------- getters ---------------------
     getAssociates(){
       this._AssociatesService.getAssociates().toPromise().then(associates => this._Associates = associates);
-    }
+    };
     //-------------------------------- post -------------------------
     postAssociateGroup(pGroup:number,pAssociate:number){
       return this._GroupService.addAssociate(pGroup,pAssociate).subscribe(
-        data =>console.log(""),
-        error => this.errorMsg = error
+        data => {},
+        error => {},
+        () => {
+          this.showMsg = true;
+          setTimeout( ()=>   {this.showMsg = false},5000 )
+        }
         );
-    }
+    };
     postAssociateEvent(pEvent:number,pAssociate:number){
       return this._EventService.addAssociate(pEvent,pAssociate).subscribe(
-        data =>console.log(""),
-        error => this.errorMsg = error
+        data => {},
+        error => {},
+        () => {
+          this.showMsg = true;
+          setTimeout( ()=>   {this.showMsg = false},5000 )
+        }
         );
-    }
+    };
+    postAssociateDocument(pDocument:number,pAssociate:number){
+      return this._DocumentService.addAssociate(pDocument,pAssociate).subscribe(
+        data => {},
+        error => {},
+        () => {
+          this.showMsg = true;
+          setTimeout( ()=>   {this.showMsg = false},5000 )
+        }
+        );
+    };
+    postAssociateForm(pForm:number, pAssociate:number){
+      return this._FormsService.addAssociate(pForm,pAssociate).subscribe(
+        data => {},
+        error => {},
+        () => {
+          this.showMsg = true;
+          setTimeout( ()=>   {this.showMsg = false},5000 )
+        }
+      )
+    };
 
 }

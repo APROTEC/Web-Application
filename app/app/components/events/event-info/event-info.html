@@ -1,9 +1,9 @@
-<div class="section">
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
   <div class="container-fluid">
     <h2>Información General
       <a class="btn btn-primary" style="margin-left: 10px;" (click)="edit()"><span class="glyphicon glyphicon-pencil"></span></a>
       <a class="btn btn-danger " style="margin-left: 10px;float:right">Eliminar</a>
-      <a class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float: right;">Enviar notificación</a>
+      <a class="btn btn-info" data-toggle="modal" data-target="#emailModal" style="float: right;">Enviar notificación</a>
     </h2>
     <hr>
     <div class="row">
@@ -22,12 +22,16 @@
                     <input class="form-control" type="datetime-local" [(ngModel)]="_Event.fecha_hora" [readonly]="!isEditing" required>
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="budgetedAmount">Monto Presupuestado</label>
-                    <input class="form-control"  type="text" [(ngModel)]="_Event.budgetedAmount" [readonly]="!isEditing">
+                    <label class="control-label" for="budgetedAmount">Precio de la entrada</label>
+                    <input class="form-control"  type="text" [(ngModel)]="_Event.precio_entrada_asociados" [readonly]="!isEditing">
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="realCost">Costo Real</label>
-                    <input class="form-control "  type="text" [(ngModel)]="_Event.realCost"  [readonly]="!isEditing">
+                    <label class="control-label" for="confirmedParticipants">Participantes confirmados</label>
+                    <input class="form-control" type="text" [(ngModel)]="_Event.confirmedParticipants" [readonly]="true">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="confirmedParticipants">Cantidad de acompañantes</label>
+                    <input class="form-control" type="text" [(ngModel)]="_Event.acompanantes" [readonly]="true">
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="place">Lugar</label>
@@ -46,12 +50,12 @@
                     <input class="form-control"  type="number" [(ngModel)]="_Event.numero_maximo_acompanantes"  [readonly]="!isEditing" required>
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="confirmedParticipants">Participantes Confirmados</label>
-                    <input class="form-control" type="text" [(ngModel)]="_Event.confirmedParticipants" [readonly]="true">
+                    <label class="control-label" for="realCost">Fecha limite de acción</label>
+                    <input class="form-control "  type="datetime-local" [(ngModel)]="_Event.fecha_limite_accion"  [readonly]="!isEditing">
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="presentedParticipants">Participantes Presentados</label>
-                    <input class="form-control"  type="text" [(ngModel)]="_Event.presentedParticipants" [readonly]="!isEditing">
+                    <label class="control-label" for="presentedParticipants">Participantes invitados</label>
+                    <input class="form-control"  type="text" [(ngModel)]="_Event.noConfirmedParticipants" [readonly]="true">
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="description">Descripción</label>
@@ -59,7 +63,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-danger" style=" float: right;margin-left: 15px;" [style.display]="isEditing ? '' : 'None'" (click)="cancelEdit()">Cancelar</button>
+              <a class="btn btn-danger" style=" float: right;margin-left: 15px;" [style.display]="isEditing ? '' : 'None'" (click)="cancelEdit()">Cancelar</a>
               <button type="submit" class="btn btn-success" style=" float: right;" [style.display]="isEditing ? '' : 'None'">Guardar</button>
             </form>
           </div>
@@ -69,4 +73,6 @@
   </div>
   <hr>
 </div>
-<emailModal></emailModal>
+<loading *ngIf="isLoading"></loading>
+<emailModal [component]="component"></emailModal>
+<Alert *ngIf="showMsg" [message]="message"></Alert>

@@ -7,6 +7,18 @@ System.register([], function(exports_1, context_1) {
         execute: function() {
             Associate = (function () {
                 function Associate() {
+                    this.codigo_informacion_persona = 0;
+                    this.nombre = " ";
+                    this.apellidos = " ";
+                    this.fecha_nacimiento = " ";
+                    this.correo_personal = " ";
+                    this.cargo_jefatura = false;
+                    this.vegetariano = false;
+                    this.cedula = 0;
+                    this.correo_institucional = " ";
+                    this.telefono_trabajo = " ";
+                    this.numero_extension = " ";
+                    this.talla_camisa = new ShirtSize(" ");
                 }
                 return Associate;
             }());

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './services/login.service', './user/user', '../shared/alerts/alert.compononet'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './services/login.service', './user/user', '../shared/alerts/alert.compononet', '../shared/loading/loading.component', '../shared/passwordReset/passwordReset.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, core_2, login_service_1, user_1, alert_compononet_1;
+    var core_1, router_1, core_2, login_service_1, user_1, alert_compononet_1, loading_component_1, passwordReset_component_1;
     var logInComponent;
     return {
         setters:[
@@ -31,6 +31,12 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './
             },
             function (alert_compononet_1_1) {
                 alert_compononet_1 = alert_compononet_1_1;
+            },
+            function (loading_component_1_1) {
+                loading_component_1 = loading_component_1_1;
+            },
+            function (passwordReset_component_1_1) {
+                passwordReset_component_1 = passwordReset_component_1_1;
             }],
         execute: function() {
             logInComponent = (function () {
@@ -40,6 +46,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './
                     this.LogInService = LogInService;
                     this.actualUser = new user_1.User();
                     this._User = new user_1.User();
+                    this.isLoading = false;
+                    this.isPageLoading = false;
                     this.showAlertMsg = false;
                     this.alertMessage = {
                         "message": "El usuario o la contraseña es incorrecto",
@@ -58,25 +66,32 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', './
                 };
                 logInComponent.prototype.onSubmit = function () {
                     var _this = this;
+                    this.isLoading = true;
                     this.verifyUser(this.actualUser.nombre_usuario, this.actualUser.contrasena).then(function (t) {
                         _this._cookieService.put("userName", _this._User.nombre_usuario);
                         _this._cookieService.put("password", _this.actualUser.contrasena);
                         _this._cookieService.put("userType", _this._User.codigo_tipo_usuario);
+                        _this._cookieService.put("userCode", _this._User.codigo_usuario.toString());
+                        console.log(_this._cookieService.get("userCode"));
                         _this._router.navigate(['Navbar']);
+                        _this.isLoading = false;
                     }).catch(function (c) {
+                        _this.isLoading = false;
                         _this.showAlertMsg = true;
                         setTimeout(function () { _this.showAlertMsg = false; }, 5000);
                     });
                 };
+                logInComponent.prototype.resetPassword = function () {
+                };
                 logInComponent.prototype.verifyUser = function (pUserName, pPassword) {
                     var _this = this;
-                    return this.LogInService.getUser(pUserName, pPassword).toPromise().then(function (Users) { return _this._User = Users[0]; });
+                    return this.LogInService.getUser(pUserName, pPassword).toPromise().catch(function (error) { return _this.isLoading = false; }).then(function (Users) { return _this._User = Users[0]; });
                 };
                 logInComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/components/logIn/logIn.html',
-                        directives: [alert_compononet_1.Alert],
-                        providers: [core_2.CookieService, login_service_1.LogInService]
+                        directives: [alert_compononet_1.Alert, passwordReset_component_1.PassResetComponent],
+                        providers: [core_2.CookieService, login_service_1.LogInService, loading_component_1.LoadingComponent, passwordReset_component_1.PassResetComponent]
                     }), 
                     __metadata('design:paramtypes', [core_2.CookieService, router_1.Router, login_service_1.LogInService])
                 ], logInComponent);

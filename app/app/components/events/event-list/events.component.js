@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/event.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../event/event', '../services/event.service', '../../shared/loading/loading.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../services/event.service'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, event_service_1;
+    var core_1, router_1, event_1, event_service_1, loading_component_1;
     var EventsComponent;
     return {
         setters:[
@@ -20,35 +20,73 @@ System.register(['angular2/core', 'angular2/router', '../services/event.service'
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (event_1_1) {
+                event_1 = event_1_1;
+            },
             function (event_service_1_1) {
                 event_service_1 = event_service_1_1;
+            },
+            function (loading_component_1_1) {
+                loading_component_1 = loading_component_1_1;
             }],
         execute: function() {
             EventsComponent = (function () {
                 function EventsComponent(_EventService, _router) {
                     this._EventService = _EventService;
                     this._router = _router;
-                    this.tempEvents = this.events;
+                    this.events = new Array();
+                    this.tempEvents = new Array();
+                    this.isLoading = true;
+                    this.isPedingChecked = true;
+                    this.isDoneChecked = false;
+                    this.searchTerm = "";
+                    this.actualType = "Todos";
                 }
-                EventsComponent.prototype.getEvents = function () {
-                    var _this = this;
-                    this._EventService.getEvents().subscribe(function (events) { _this.events = events; _this.tempEvents = events; }, function (error) { return _this.errorMessage = error; });
-                };
-                EventsComponent.prototype.getTypesEvents = function () {
-                    var _this = this;
-                    return this._EventService.getTypesEvents().toPromise().then(function (eventTypes) { return _this.eventTypes = eventTypes; }, function (error) { return _this.errorMessage = error; });
-                };
                 EventsComponent.prototype.ngOnInit = function () {
                     this.getEvents();
                     this.getTypesEvents();
                 };
-                EventsComponent.prototype.search = function (term) {
-                    if (term == "") {
-                        this.tempEvents = this.events;
+                EventsComponent.prototype.onEventsPendingChanged = function () {
+                    this.isPedingChecked = !this.isPedingChecked;
+                    this.onStateChanged();
+                };
+                EventsComponent.prototype.onEventsDoneChanged = function () {
+                    this.isDoneChecked = !this.isDoneChecked;
+                    this.onStateChanged();
+                };
+                EventsComponent.prototype.onStateChanged = function () {
+                    this.filterDate();
+                    this.filterSearchTerm();
+                    this.filterTypeEvent();
+                };
+                EventsComponent.prototype.filterDate = function () {
+                    var events = new Array();
+                    if (this.isPedingChecked) {
+                        events = events.concat(this.events.filter(function (event) { return new Date(event.fecha_hora) > new Date(); }));
+                    }
+                    if (this.isDoneChecked) {
+                        events = events.concat(this.events.filter(function (event) { return new Date(event.fecha_hora) < new Date(); }));
+                    }
+                    this.tempEvents = events;
+                };
+                EventsComponent.prototype.filterSearchTerm = function () {
+                    var _this = this;
+                    if (this.searchTerm == "") {
+                        this.tempEvents = this.tempEvents;
                     }
                     else {
-                        this.tempEvents = this.events.filter(function (event) { return event.nombre.includes(term); });
+                        this.tempEvents = this.tempEvents.filter(function (event) { return event.nombre.toLowerCase().includes(_this.searchTerm.toLowerCase()); });
                     }
+                };
+                EventsComponent.prototype.filterTypeEvent = function () {
+                    var _this = this;
+                    if (this.actualType != "Todos") {
+                        this.tempEvents = this.tempEvents.filter(function (event) { return event.tipo_evento.codigo_tipo_evento == +_this.actualType; });
+                    }
+                };
+                EventsComponent.prototype.onTypeEventChanged = function (pType) {
+                    this.actualType = pType;
+                    this.onStateChanged();
                 };
                 EventsComponent.prototype.goToEvent = function (event) {
                     this._router.navigate(['EventDetail', { id: event.codigo_evento }]);
@@ -56,11 +94,28 @@ System.register(['angular2/core', 'angular2/router', '../services/event.service'
                 EventsComponent.prototype.createEvent = function () {
                     this._router.navigate(['NewEvent']);
                 };
+                //------------------------------ Getters ------------------------------------
+                EventsComponent.prototype.getEvents = function () {
+                    var _this = this;
+                    this._EventService.getEvents().retry(3).subscribe(function (events) {
+                        _this.events = events;
+                        for (var iEvent = 0; iEvent != events.length; iEvent++) {
+                            _this.events[iEvent].tipo_evento = new event_1.EventType();
+                            _this.events[iEvent].tipo_evento.codigo_tipo_evento = events[iEvent].codigo_tipo_evento;
+                        }
+                        _this.tempEvents = _this.events.filter(function (event) { return new Date(event.fecha_hora) > new Date(); });
+                    }, function (error) { return _this.errorMessage = error; }, function () { _this.isLoading = false; });
+                };
+                EventsComponent.prototype.getTypesEvents = function () {
+                    var _this = this;
+                    return this._EventService.getTypesEvents().toPromise().then(function (eventTypes) { return _this.eventTypes = eventTypes; }, function (error) { return _this.errorMessage = error; });
+                };
                 EventsComponent = __decorate([
                     core_1.Component({
                         selector: 'events',
                         templateUrl: 'app/components/events/event-list/events.html',
-                        styleUrls: ['app/components/events/event-list/styles/events.css']
+                        styleUrls: ['app/components/events/event-list/styles/events.css'],
+                        directives: [loading_component_1.LoadingComponent]
                     }), 
                     __metadata('design:paramtypes', [event_service_1.EventService, router_1.Router])
                 ], EventsComponent);

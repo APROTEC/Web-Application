@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/associate.service', '../../groups/services/group.service', '../../events/services/event.service', '../../shared/alerts/alert.compononet'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../services/associate.service', '../../groups/services/group.service', '../../events/services/event.service', '../../documents/services/documents.service', '../../forms/services/form.service', '../../shared/alerts/alert.compononet'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../services/associate.serv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, associate_service_1, group_service_1, event_service_1, alert_compononet_1;
+    var core_1, router_1, associate_service_1, group_service_1, event_service_1, documents_service_1, form_service_1, alert_compononet_1;
     var AssociateAddComponent;
     return {
         setters:[
@@ -29,35 +29,28 @@ System.register(['angular2/core', 'angular2/router', '../services/associate.serv
             function (event_service_1_1) {
                 event_service_1 = event_service_1_1;
             },
+            function (documents_service_1_1) {
+                documents_service_1 = documents_service_1_1;
+            },
+            function (form_service_1_1) {
+                form_service_1 = form_service_1_1;
+            },
             function (alert_compononet_1_1) {
                 alert_compononet_1 = alert_compononet_1_1;
             }],
         execute: function() {
             AssociateAddComponent = (function () {
-                function AssociateAddComponent(routeParams, _router, _AssociatesService, _GroupService, _EventService, location) {
+                function AssociateAddComponent(routeParams, _router, _AssociatesService, _GroupService, _EventService, _DocumentService, _FormsService) {
                     this._router = _router;
                     this._AssociatesService = _AssociatesService;
                     this._GroupService = _GroupService;
                     this._EventService = _EventService;
-                    this.location = location;
+                    this._DocumentService = _DocumentService;
+                    this._FormsService = _FormsService;
                     this.associatesToAdd = new Array();
-                    this.groupId = 0;
-                    this.eventId = 0;
-                    this.isGroup = false;
-                    this.isEvent = false;
                     this.message = { message: "Asociados agregados con éxito",
                         typeMessage: "Success" };
                     this.showMsg = false;
-                    if (_router.hostComponent.name == "GroupDetailComponent") {
-                        this.groupId = +routeParams.get('id');
-                        this.isGroup = true;
-                    }
-                    else {
-                        var tempLocation = location.path().substr(11);
-                        tempLocation = tempLocation.substr(0, tempLocation.indexOf('/'));
-                        this.eventId = +tempLocation;
-                        this.isEvent = true;
-                    }
                 }
                 AssociateAddComponent.prototype.ngOnInit = function () {
                     this.getAssociates();
@@ -67,17 +60,20 @@ System.register(['angular2/core', 'angular2/router', '../services/associate.serv
                 };
                 AssociateAddComponent.prototype.addAssociates = function () {
                     var _this = this;
-                    if (this.isGroup) {
-                        console.log("grupo");
-                        this.associatesToAdd.forEach(function (a) { return _this.postAssociateGroup(_this.groupId, a.codigo_informacion_persona); });
+                    if (this.component.type == "Events") {
+                        this.associatesToAdd.forEach(function (a) { return _this.postAssociateEvent(_this.component.id, a.codigo_informacion_persona); });
                     }
-                    else {
-                        console.log("evento");
-                        this.associatesToAdd.forEach(function (a) { return _this.postAssociateEvent(_this.eventId, a.codigo_informacion_persona); });
+                    else if (this.component.type == "Groups") {
+                        this.associatesToAdd.forEach(function (a) { return _this.postAssociateGroup(_this.component.id, a.codigo_informacion_persona); });
                     }
-                    this.showMsg = true;
-                    setTimeout(function () { _this.showMsg = false; }, 5000);
+                    else if (this.component.type == "Documents") {
+                        this.associatesToAdd.forEach(function (a) { return _this.postAssociateDocument(_this.component.id, a.codigo_informacion_persona); });
+                    }
+                    else if (this.component.type == "Forms") {
+                        this.associatesToAdd.forEach(function (a) { return _this.postAssociateForm(_this.component.id, a.codigo_informacion_persona); });
+                    }
                 };
+                ;
                 AssociateAddComponent.prototype.addTempAssociate = function (pAssociate) {
                     if (!this.associatesToAdd.find(function (i) { return i.codigo_informacion_persona == pAssociate.codigo_informacion_persona; })) {
                         this.associatesToAdd.push(pAssociate);
@@ -88,7 +84,7 @@ System.register(['angular2/core', 'angular2/router', '../services/associate.serv
                         this.tempAssociates = new Array();
                     }
                     else {
-                        this.tempAssociates = this._Associates.filter(function (associate) { return associate.nombre.toLowerCase().startsWith(pTerm.toLowerCase()); }).splice(0, 3);
+                        this.tempAssociates = this._Associates.filter(function (associate) { return (associate.nombre + " " + associate.apellidos + " " + associate.cedula).toLowerCase().includes(pTerm.toLowerCase()); }).splice(0, 4);
                     }
                 };
                 //-------------------------------- getters ---------------------
@@ -96,24 +92,53 @@ System.register(['angular2/core', 'angular2/router', '../services/associate.serv
                     var _this = this;
                     this._AssociatesService.getAssociates().toPromise().then(function (associates) { return _this._Associates = associates; });
                 };
+                ;
                 //-------------------------------- post -------------------------
                 AssociateAddComponent.prototype.postAssociateGroup = function (pGroup, pAssociate) {
                     var _this = this;
-                    return this._GroupService.addAssociate(pGroup, pAssociate).subscribe(function (data) { return console.log(""); }, function (error) { return _this.errorMsg = error; });
+                    return this._GroupService.addAssociate(pGroup, pAssociate).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
                 };
+                ;
                 AssociateAddComponent.prototype.postAssociateEvent = function (pEvent, pAssociate) {
                     var _this = this;
-                    return this._EventService.addAssociate(pEvent, pAssociate).subscribe(function (data) { return console.log(""); }, function (error) { return _this.errorMsg = error; });
+                    return this._EventService.addAssociate(pEvent, pAssociate).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
                 };
+                ;
+                AssociateAddComponent.prototype.postAssociateDocument = function (pDocument, pAssociate) {
+                    var _this = this;
+                    return this._DocumentService.addAssociate(pDocument, pAssociate).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
+                };
+                ;
+                AssociateAddComponent.prototype.postAssociateForm = function (pForm, pAssociate) {
+                    var _this = this;
+                    return this._FormsService.addAssociate(pForm, pAssociate).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
+                };
+                ;
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], AssociateAddComponent.prototype, "component", void 0);
                 AssociateAddComponent = __decorate([
                     core_1.Component({
                         selector: 'associateAdd',
                         templateUrl: 'app/components/associates/associate-add/associate-add.html',
                         styleUrls: ['app/components/associates/associate-add/styles/associate-add.css'],
                         directives: [alert_compononet_1.Alert],
-                        providers: [associate_service_1.AssociatesService]
+                        providers: [associate_service_1.AssociatesService, documents_service_1.DocumentsService, form_service_1.FormsService, group_service_1.GroupService, event_service_1.EventService]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, router_1.Router, associate_service_1.AssociatesService, group_service_1.GroupService, event_service_1.EventService, router_1.Location])
+                    __metadata('design:paramtypes', [router_1.RouteParams, router_1.Router, associate_service_1.AssociatesService, group_service_1.GroupService, event_service_1.EventService, documents_service_1.DocumentsService, form_service_1.FormsService])
                 ], AssociateAddComponent);
                 return AssociateAddComponent;
             }());

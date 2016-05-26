@@ -9,7 +9,9 @@ System.register([], function(exports_1, context_1) {
                 function httpConfig() {
                 }
                 httpConfig.prototype.construct = function () { };
-                httpConfig.host = "http://localhost:8081/";
+                //public static host:string = "http://webserviceaprotec.herokuapp.com/";
+                //public static host:string = "http://blooming-ridge-16379.herokuapp.com/";
+                httpConfig.host = "http://localhost:5000/";
                 return httpConfig;
             }());
             exports_1("httpConfig", httpConfig);

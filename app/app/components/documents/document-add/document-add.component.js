@@ -24,6 +24,51 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
             DocumentAddComponent = (function () {
                 function DocumentAddComponent(routeParams) {
                 }
+                DocumentAddComponent.prototype.addDocument = function () {
+                    console.log(this.file);
+                };
+                DocumentAddComponent.prototype.uploadFiles = function (e) {
+                    var file = e.files[0];
+                    console.log(file);
+                    var xhr = new XMLHttpRequest();
+                    var nombre = "prueba";
+                    var blob = new Blob([file], { type: 'application/pdf' });
+                    //xhr.open("POST", 'http://localhost:8081/actas/{"nombre_acta":"ejemplo","descripcion_acta":"acta de ejemplo"}',true);
+                    xhr.open("POST", 'http://localhost:8081/actas/' + this.convertJson("prueba", "ejemplo acta"), true);
+                    xhr.setRequestHeader('Content-type', 'multipart/form-data');
+                    //xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
+                    //let formData = new FormData(file);
+                    //xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+                    //console.log(formData instanceof Blob);
+                    console.log(blob);
+                    xhr.send(blob);
+                };
+                DocumentAddComponent.prototype.convertJson = function (nombre_acta, descripcion_acta) {
+                    return JSON.stringify({ nombre_acta: nombre_acta, descripcion_acta: descripcion_acta });
+                };
+                DocumentAddComponent.prototype.FileUpload = function (img, file) {
+                    var reader = new FileReader();
+                    var xhr = new XMLHttpRequest();
+                    this.xhr = xhr;
+                    var self = this;
+                    this.xhr.upload.addEventListener("progress", function (e) {
+                        if (e.lengthComputable) {
+                            var percentage = Math.round((e.loaded * 100) / e.total);
+                            self.ctrl.update(percentage);
+                        }
+                    }, false);
+                    xhr.upload.addEventListener("load", function (e) {
+                        self.ctrl.update(100);
+                        var canvas = self.ctrl.ctx.canvas;
+                        canvas.parentNode.removeChild(canvas);
+                    }, false);
+                    xhr.open("POST", "http://demos.hacks.mozilla.org/paul/demos/resources/webservices/devnull.php");
+                    xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
+                    reader.onload = function (evt) {
+                        xhr.send(evt.target);
+                    };
+                    reader.readAsBinaryString(file);
+                };
                 DocumentAddComponent = __decorate([
                     core_1.Component({
                         selector: 'documentAdd',

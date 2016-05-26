@@ -1,0 +1,43 @@
+<div class="section">
+  <div class="container-fluid">
+    <h2>Documentos
+      <a class="btn btn-primary" style="float: right;" href="app/components/angular/event-document-add.html"><span class="glyphicon glyphicon-upload"></span> Agregar documento</a>
+    </h2>
+    <hr>
+    <div class="container-fluid">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class = "container-fluid">
+            <div class = "col-md-9">
+              <h4 class="list-group-item-heading">Nombre</h4>
+            </div>
+            <div class = "col-md-2">
+              <h4 class="list-group-item-heading" style="text-align:right">Descargar</h4>
+            </div>
+            <div class = "col-md-1">
+              <h4 class="list-group-item-heading" style="text-align:right">Borrar</h4>
+            </div>
+          </div>
+        </li>
+        <a class="list-group-item" *ngFor="#document of _Documents">
+          <div class = "container-fluid">
+            <div class = "col-md-9" >
+              <h4 class="list-group-item-text" style="color:black;">{{document.nombre_documento}}</h4>
+            </div>
+            <div class = "col-md-2">
+              <button type="button" class="btn btn-primary" style="float:right;" (click)="downloadDocument(document)">
+                <span class="glyphicon glyphicon-download-alt"></span>
+              </button>
+            </div>
+            <div class = "col-md-1">
+              <button class="btn btn-danger" style="float: right;" type="button" (click)="deleteDocument(document)"><span class="glyphicon glyphicon-trash" ></span></button>
+            </div>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
+<documentAdd></documentAdd>
+<Alert *ngIf="showMsg" [message]="message"></Alert>
+<loading *ngIf="isLoading"></loading>

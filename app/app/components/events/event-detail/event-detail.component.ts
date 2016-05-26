@@ -5,7 +5,7 @@ import {Router, RouteParams} from 'angular2/router';
 import {EventInfoComponent} from '../event-info/event-info.component';
 import {EventGuestsComponent} from '../event-guests/event-guests.component';
 import {EventManagersComponent} from '../event-managers/event-managers.component';
-import {EventDocumentsComponent} from '../event-documents/event-documents.component';
+import {EventDocumentsComponent} from '../event-documents/event-document-list/event-documents.component';
 import {EventCommentsComponent} from '../event-comments/event-comments.component';
 import {Event} from '../event/event';
 import {EventService} from '../services/event.service';
@@ -30,10 +30,11 @@ export class EventDetailComponent {
     _Event = new Event();
     eventId:number;
     erroMsg:string;
+    _Comments= new Array();
     ngOnInit() {
       this.eventId = +this.routeParams.get('id');
       this.getEvent(this.eventId);
-
+      this.getComments()
     }
     constructor(private routeParams: RouteParams, private _router:Router,private _EventService:EventService) {
         this.eventId = +routeParams.get('id');
@@ -44,9 +45,16 @@ export class EventDetailComponent {
     }
 
     getEvent(pEvent:number){
-      this._EventService.getEvent(pEvent).subscribe(
+      this._EventService.getEvent(pEvent).retry(3).subscribe(
         event => this._Event = event[0],
         error => this.erroMsg = error
       )
+    }
+    getComments(){
+      this._EventService.getComments(this.eventId).retry(3).subscribe(
+        comments => { this._Comments = comments;},
+        error => {},
+        () => {}
+      );
     }
 }
