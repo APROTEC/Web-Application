@@ -111,6 +111,14 @@ export class EventService{
                       .map(res =>  <Event> res.json().data)
                       .catch(this.handleError)
     }
+    deleteDocument(codigo_evento_documento:number){
+      let body = JSON.stringify({codigo_evento_documento});
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.delete(httpConfig.host+"eventos_documentos/"+codigo_evento_documento,options)
+                      .map(res =>  <Event> res.json().data)
+                      .catch(this.handleError)
+    }
 
 
     private handleError (error: Response) {

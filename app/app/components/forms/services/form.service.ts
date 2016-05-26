@@ -27,6 +27,7 @@ export class FormsService {
 
   //------------------------------------------- Posts ----------------------------------------------------
   createForm (nombre_encuesta: string, link_encuesta:string) {
+    link_encuesta = link_encuesta.replace("/","%2F")
     let body = JSON.stringify({ nombre_encuesta,link_encuesta});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -53,8 +54,8 @@ export class FormsService {
 
   //------------------------------------------- Puts ----------------------------------------------------
   updateForm (codigo_encuesta,nombre_encuesta: string, link_encuesta:string){
+    link_encuesta = link_encuesta.replace("/","%2F")
     let body = JSON.stringify({ codigo_encuesta,nombre_encuesta,link_encuesta });
-    console.log(body);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(httpConfig.host+"encuestas/"+body, JSON.stringify({ codigo_encuesta,nombre_encuesta}), options)

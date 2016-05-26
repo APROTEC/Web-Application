@@ -1,1 +1,1 @@
-{"version":3,"file":"httpConfig.js","sourceRoot":"","sources":["httpConfig.ts"],"names":[],"mappings":";;;;;;;YAAA;gBAAA;gBAKA,CAAC;gBADC,8BAAS,GAAT,cAAY,CAAC;gBAHb,wEAAwE;gBACxE,2EAA2E;gBAC7D,eAAI,GAAU,wBAAwB,CAAC;gBAEvD,iBAAC;YAAD,CAAC,AALD,IAKC;YALD,mCAKC,CAAA"}
+{"version":3,"file":"httpConfig.js","sourceRoot":"","sources":["httpConfig.ts"],"names":[],"mappings":";;;;;;;YAAA;gBAAA;gBAKA,CAAC;gBAHC,2EAA2E;gBAC3E,uDAAuD;gBACvD,8BAAS,GAAT,cAAY,CAAC;gBAHC,eAAI,GAAU,yCAAyC,CAAC;gBAIxE,iBAAC;YAAD,CAAC,AALD,IAKC;YALD,mCAKC,CAAA"}

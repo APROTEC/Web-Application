@@ -50,6 +50,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                 };
                 //------------------------------------------- Posts ----------------------------------------------------
                 FormsService.prototype.createForm = function (nombre_encuesta, link_encuesta) {
+                    link_encuesta = link_encuesta.replace("/", "%2F");
                     var body = JSON.stringify({ nombre_encuesta: nombre_encuesta, link_encuesta: link_encuesta });
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
@@ -75,8 +76,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                 };
                 //------------------------------------------- Puts ----------------------------------------------------
                 FormsService.prototype.updateForm = function (codigo_encuesta, nombre_encuesta, link_encuesta) {
+                    link_encuesta = link_encuesta.replace("/", "%2F");
                     var body = JSON.stringify({ codigo_encuesta: codigo_encuesta, nombre_encuesta: nombre_encuesta, link_encuesta: link_encuesta });
-                    console.log(body);
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
                     return this.http.put(httpConfig_1.httpConfig.host + "encuestas/" + body, JSON.stringify({ codigo_encuesta: codigo_encuesta, nombre_encuesta: nombre_encuesta }), options)

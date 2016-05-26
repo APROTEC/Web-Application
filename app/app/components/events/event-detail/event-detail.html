@@ -25,7 +25,7 @@
                       <li [class.active]="isRouteActive('Guests')">
                         <a [routerLink]="['Guests']">Invitados</a>
                       </li>
-                      <li [class.active]="isRouteActive('EventManagers')">
+                      <li *ngIf="false" [class.active]="isRouteActive('EventManagers')">
                         <a [routerLink]="['EventManagers']">Responsables</a>
                       </li>
                       <li [class.active]="isRouteActive('Documents')">

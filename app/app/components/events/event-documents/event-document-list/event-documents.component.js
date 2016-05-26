@@ -32,6 +32,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
         execute: function() {
             EventDocumentsComponent = (function () {
                 function EventDocumentsComponent(_EventService, _router, injector) {
+                    var _this = this;
                     this._EventService = _EventService;
                     this._router = _router;
                     this.injector = injector;
@@ -39,6 +40,11 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                     this.isLoading = true;
                     this.message = { message: "", typeMessage: "" };
                     this.showMsg = false;
+                    setTimeout(function () {
+                        setInterval(function () {
+                            _this.getDocuments();
+                        }, 1000);
+                    }, 3000);
                 }
                 EventDocumentsComponent.prototype.ngOnInit = function () {
                     var params = this.injector.parent.parent.get(router_1.RouteParams);
@@ -47,16 +53,22 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                 };
                 EventDocumentsComponent.prototype.getDocuments = function () {
                     var _this = this;
-                    this._EventService.getDocuments(this._EventId).retry(3).subscribe(function (documents) { _this._Documents = documents; console.log(documents[1]); }, function (error) { }, function () { _this.isLoading = false; });
+                    this._EventService.getDocuments(this._EventId).retry(3).subscribe(function (documents) { _this._Documents = documents; }, function (error) { }, function () { _this.isLoading = false; });
+                };
+                EventDocumentsComponent.prototype.deleteDocument = function (pDocument) {
+                    var _this = this;
+                    this._EventService.deleteDocument(pDocument).subscribe(function (data) { }, function (error) { }, function () {
+                        _this.message.message = "Se ha eliminado el documento con éxito";
+                        _this.message.typeMessage = "Success";
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
                 };
                 EventDocumentsComponent.prototype.downloadDocument = function (pDocument) {
                     var link = document.createElement("a");
                     //link.download = pDocument.nombre_acta;
                     link.href = "http://" + pDocument.link_documento;
                     link.click();
-                };
-                EventDocumentsComponent.prototype.goToDocument = function (pDocument) {
-                    this._router.navigateByUrl("app/documents/" + pDocument.codigo_evento_documento);
                 };
                 EventDocumentsComponent = __decorate([
                     core_1.Component({

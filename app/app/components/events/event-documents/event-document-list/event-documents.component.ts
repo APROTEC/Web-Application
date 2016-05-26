@@ -20,7 +20,13 @@ export class EventDocumentsComponent implements OnInit{
   isLoading = true;
   message = { message:"",typeMessage: "" };
   showMsg = false;
-  constructor(private _EventService:EventService, private _router:Router,private injector: Injector){}
+  constructor(private _EventService:EventService, private _router:Router,private injector: Injector){
+    setTimeout(() => {
+      setInterval( ()=>{
+         this.getDocuments()
+      },1000)
+    },3000)
+  }
   ngOnInit(){
     let params = this.injector.parent.parent.get(RouteParams);
     this._EventId = params.get('id');
@@ -28,10 +34,22 @@ export class EventDocumentsComponent implements OnInit{
   }
   getDocuments(){
     this._EventService.getDocuments(this._EventId).retry(3).subscribe(
-      documents => {this._Documents = documents; console.log(documents[1])},
+      documents => {this._Documents = documents;},
       error => {},
       () => {this.isLoading = false;}
     )
+  }
+  deleteDocument(pDocument:number){
+    this._EventService.deleteDocument(pDocument).subscribe(
+      data => {},
+      error => {},
+      () => {
+        this.message.message = "Se ha eliminado el documento con éxito";
+        this.message.typeMessage = "Success"
+        this.showMsg = true;
+        setTimeout( () => {this.showMsg = false},5000)
+      }
+    );
   }
   downloadDocument(pDocument:EventDocument){
     var link = document.createElement("a");
@@ -39,7 +57,5 @@ export class EventDocumentsComponent implements OnInit{
     link.href = "http://"+pDocument.link_documento;
     link.click();
   }
-  goToDocument(pDocument:EventDocument){
-    this._router.navigateByUrl("app/documents/"+pDocument.codigo_evento_documento);
-  }
+
 }

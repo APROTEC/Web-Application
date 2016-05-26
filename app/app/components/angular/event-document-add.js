@@ -27,9 +27,10 @@ angular.module('fileUploadEvent', ['ngFileUpload'])
 
     vm.upload = function (file,nombre_acta,pEvento) {
       var obj = new Object();
-       obj.nombre_acta = nombre_acta;
+       obj.nombre_documento = nombre_acta;
        obj.codigo_evento = pEvento
        var body= JSON.stringify(obj);
+       console.log(body)
         Upload.upload({
             //url: 'http://localhost:8081/actas/'+body, //webAPI exposed to upload the file
             url: 'http://webserviceaprotec.herokuapp.com/eventos_documentos/'+body, //webAPI exposed to upload the file
