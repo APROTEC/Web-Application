@@ -118,8 +118,6 @@ System.register(['angular2/core', 'angular2/router', '../associate-new/associate
                             associate.sede = _this.sedes.find(function (sede) { return sede.codigo_sede == associate.codigo_sede; }).nombre_sede; });
                         _this._Associates.forEach(function (associate) { if (associate.fecha_nacimiento != null)
                             associate.fecha_nacimiento = associate.fecha_nacimiento.substring(0, 10); });
-                        _this._Associates.forEach(function (associate) { if (associate.foto != null)
-                            associate.foto = "http://" + associate.foto; });
                     });
                 };
                 AssociatesComponent.prototype.getSedes = function () {

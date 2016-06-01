@@ -23,7 +23,8 @@
               <div class="jumbotron" style="padding-top:10px;padding-bottom:10px">
                 <h3>{{group.descripcion_grupo}}</h3>
                 <div clas="row" style=" color:black;">
-                  <p style="font-size:16px;">0 personas</p>
+                  <p style="font-size:16px;" *ngIf="group.cantidad_miembros > 1">{{group.cantidad_miembros}} personas</p>
+                  <p style="font-size:16px;" *ngIf="group.cantidad_miembros == 1">{{group.cantidad_miembros}} persona</p>
                 </div>
               </div>
             </a>

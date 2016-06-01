@@ -1,7 +1,7 @@
 <div class="section" [style.opacity]="isPageLoading ? '0' : '1' ">
   <div class="container-fluid">
     <h2>Documento {{_Document.nombre_acta}}
-      <a class="btn btn-primary" style="margin-left: 10px;" (click)="onEditData()"><span class="glyphicon glyphicon-pencil"></span></a>
+      <a class="btn btn-primary" style="margin-left: 10px;" (click)="onEditData()" *ngIf="false"><span class="glyphicon glyphicon-pencil"></span></a>
     </h2>
     <div class="container-fluid">
       <hr>

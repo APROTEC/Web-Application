@@ -26,11 +26,6 @@ export class GroupService {
                     .map(res => <Associate[]> res.json())
                     .catch(this.handleError);
   }
-  getCountMembers(pGroup:number){
-    return this.http.get(httpConfig.host+"/grupos/count_miembros/"+pGroup)
-                    .map(res => res.json())
-                    .catch(this.handleError);
-  }
 
 
     //----------------------------------- Post -------------------------

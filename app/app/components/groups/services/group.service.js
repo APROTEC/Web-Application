@@ -47,11 +47,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
-                GroupService.prototype.getCountMembers = function (pGroup) {
-                    return this.http.get(httpConfig_1.httpConfig.host + "/grupos/count_miembros/" + pGroup)
-                        .map(function (res) { return res.json(); })
-                        .catch(this.handleError);
-                };
                 //----------------------------------- Post -------------------------
                 GroupService.prototype.createGroup = function (descripcion_grupo) {
                     var body = JSON.stringify({ descripcion_grupo: descripcion_grupo });

@@ -53,7 +53,7 @@
                 <div *ngFor="#associate of tempAssociates" class="col-md-3">
                   <div class="section">
                     <div class="container-fluid associateContainer" >
-                      <a (click)="goToAssociate(associate)"><img src="images/user_placeholder.png" class="center-block img-circle img-responsive" style="max-width:160px;" href="Funcionario.html">
+                      <a (click)="goToAssociate(associate)"><img src="http://{{associate.foto}}" class="center-block img-circle img-responsive" style="width:160;max-height:160px;" href="Funcionario.html">
                       <h3 class="text-center">{{associate.nombre}}</h3>
                       <p class="text-center">{{associate.apellidos}}</p></a>
                     </div>

@@ -109,7 +109,7 @@ export class AssociatesComponent implements OnInit{
             this.isLoading = false;
             this._Associates.forEach(associate => {if(associate.sede != null) associate.sede = this.sedes.find(sede => sede.codigo_sede == associate.codigo_sede).nombre_sede})
             this._Associates.forEach(associate => {if(associate.fecha_nacimiento != null)  associate.fecha_nacimiento = associate.fecha_nacimiento.substring(0,10) })
-            this._Associates.forEach(associate => {if(associate.foto != null)  associate.foto = "http://"+associate.foto;})
+            
 
           }
         );
