@@ -61,4 +61,3 @@ System.register(['angular2/core', './services/email.service', '../alerts/alert.c
         }
     }
 });
-//# sourceMappingURL=email.component.js.map

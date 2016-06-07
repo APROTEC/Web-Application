@@ -1,0 +1,87 @@
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
+  <div class="container-fluid">
+    <h2>Información General
+      <a *ngIf="!_IsAssociateConfirmed" class="btn btn-success " style="margin-left: 10px;float:right" (click)="updateEventState(true)">Confirmar evento</a>
+      <a *ngIf="_IsAssociateConfirmed" class="btn btn-danger " style="margin-left: 10px;float:right" (click)="updateEventState(false)">Cancelar confirmación</a>
+    </h2>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron">
+          <div class="container">
+            <form role="form" (ngSubmit)="onSubmitEventData()" #eventForm="ngForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="name">Estado del evento</label>
+                    <input *ngIf="!_IsAssociateConfirmed" class="form-control" type="text" [readonly]="true" [value]="'Por confirmar'"required>
+                    <input *ngIf="_IsAssociateConfirmed" class="form-control" type="text" [readonly]="true" [value]="'Confirmado'"required>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" for="name">Nombre</label>
+                    <input class="form-control" type="text" [(ngModel)]="_Event.nombre" [readonly]="!isEditing" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="date">Fecha</label>
+                    <input class="form-control" type="datetime-local" [(ngModel)]="_Event.fecha_hora" [readonly]="!isEditing" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="budgetedAmount">Precio de la entrada</label>
+                    <input class="form-control"  type="text" [(ngModel)]="_Event.precio_entrada_asociados" [readonly]="!isEditing">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="confirmedParticipants">Participantes confirmados</label>
+                    <input class="form-control" type="text" [(ngModel)]="_Event.confirmedParticipants" [readonly]="true">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="confirmedParticipants">Cantidad de acompañantes</label>
+                    <input class="form-control" type="text" [(ngModel)]="_Event.acompanantes" [readonly]="true">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="place">Lugar</label>
+                    <textarea class="form-control" type="text" [(ngModel)]="_Event.lugar" [readonly]="!isEditing" required></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <select class="form-control" [disabled]="!isEditing">
+                      <option *ngFor="#type of eventTypes" [value]="type" >{{type.descripcion}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="capacity">Cantidad de acompañantes máximo</label>
+                    <input class="form-control"  type="number" [(ngModel)]="_Event.numero_maximo_acompanantes"  [readonly]="!isEditing" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="realCost">Fecha limite de acción</label>
+                    <input class="form-control "  type="datetime-local" [(ngModel)]="_Event.fecha_limite_accion"  [readonly]="!isEditing">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="presentedParticipants">Participantes invitados</label>
+                    <input class="form-control"  type="text" [(ngModel)]="_Event.noConfirmedParticipants" [readonly]="true">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="description">Descripción</label>
+                    <textarea class="form-control" type="text" [(ngModel)]="_Event.descripcion" [readonly]="!isEditing" required></textarea>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-danger" style=" float: right;margin-left: 15px;" [style.display]="isEditing ? '' : 'None'" (click)="cancelEdit()">Cancelar</a>
+              <button type="submit" class="btn btn-success" style=" float: right;" [style.display]="isEditing ? '' : 'None'">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+<loading *ngIf="isLoading"></loading>
+<emailModal [component]="component"></emailModal>
+<Alert *ngIf="showMsg" [message]="message"></Alert>

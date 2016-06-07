@@ -1,0 +1,19 @@
+.eventContainer {
+  color: black;
+  background-color: #eee;
+  border-radius: 10px;
+  margin-top: 20px;
+  border-style: outset;
+  cursor: pointer;
+  position: relative; }
+  .eventContainer h1, .eventContainer h2, .eventContainer h3 {
+    color: black; }
+  .eventContainer :hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em; }
+
+.plainText {
+  color: #D2D4D6; }
+
+/*# sourceMappingURL=events.css.map */

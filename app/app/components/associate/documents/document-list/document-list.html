@@ -1,0 +1,41 @@
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
+  <div class="container-fluid">
+    <h2>Documentos</h2>
+    <hr>
+    <div class="container-fluid">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class = "container-fluid">
+            <div class = "col-md-3">
+              <h4 class="list-group-item-heading">Nombre</h4>
+            </div>
+            <div class = "col-md-7">
+              <h4 class="list-group-item-heading">Descripción</h4>
+            </div>
+            <div class = "col-md-1">
+              <h4 class="list-group-item-heading">Descargar</h4>
+            </div>
+          </div>
+        </li>
+        <a class="list-group-item" *ngFor="#document of _Documents">
+          <div class = "container-fluid">
+            <div class = "col-md-3" >
+              <h4 class="list-group-item-text" style="color:black;">{{document.nombre_acta}}</h4>
+            </div>
+            <div class = "col-md-7">
+              <h5 class="list-group-item-text" style="color:black;">{{document.descripcion_acta}}</h5>
+            </div>
+            <div class = "col-md-1">
+              <button type="button" class="btn btn-primary" style="float:right;" (click)="downloadDocument(document)">
+                <span class="glyphicon glyphicon-download-alt"></span>
+              </button>
+            </div>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
+<loading *ngIf="isLoading"></loading>
+<documentAdd></documentAdd>
+<Alert *ngIf="showMsg" [message]="message"></Alert>

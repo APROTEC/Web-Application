@@ -59,4 +59,3 @@ System.register(['angular2/core', './services/passwordReset.service', '../../sha
         }
     }
 });
-//# sourceMappingURL=passwordReset.component.js.map

@@ -1,0 +1,192 @@
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section">
+          <div class="row">
+            <div class="col-md-3" style="margin:0px">
+              <img class="img-rounded" src="http://{{_ActualAssociate.foto}}"  style="width:180px; height:180px">
+            </div>
+            <div class="col-md-6" style="margin-left:-50px">
+              <h1>{{_ActualAssociate.nombre}}
+              </h1>
+              <h3>{{_ActualAssociate.apellidos}}</h3>
+              <p>{{_ActualAssociate.correo_personal}}</p>
+            </div>
+            <div class = "col-md-3">
+              <div class = "row">
+                <a class="btn btn-danger " style="margin-left: 10px;float:right" (click)="deleteAssociate()">Eliminar</a>
+                <a class="btn btn-info" data-toggle="modal" data-target="#emailModal" style="float: right;">Enviar notificación</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Datos Personales
+      <a class="btn btn-primary" style="margin-left: 10px;" (click)="editPersonalData()"><span class="glyphicon glyphicon-pencil"></span></a>
+    </h2>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron">
+          <div class="section">
+            <div class="container">
+              <form role="form" (ngSubmit)="onSubmitPersonalData()" #personalDataForm="ngForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label" for="name">Nombre</label>
+                      <input class="form-control" type="text" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.nombre" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="lastNames">Apellidos</label>
+                      <input class="form-control"  type="text" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.apellidos" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="personalEmail">Correo Personal</label>
+                      <input class="form-control" type="email" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.correo_personal" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="institutionalEmail">Correo Institucional</label>
+                      <input class="form-control"  type="email" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.correo_institucional">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="birthday">Fecha de Nacimiento</label>
+                      <input class="form-control"  type="date" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.fecha_nacimiento">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label" for="id">Identificación</label>
+                      <input class="form-control" type="number" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.cedula">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="cellphone">Teléfono celular</label>
+                      <input class="form-control" type="number" [readonly]="!isEditingPersonalData" [(ngModel)]="_ActualAssociate.telefono_trabajo">
+                    </div>
+                    <div class="form-group">
+                      <label for="province">Provincia</label>
+                      <select #provinceSelect class="form-control" [disabled]="!isEditingPersonalData" (change) = "onProvinceChanged(provinceSelect.value)">
+                        <option [value] = null></option>
+                        <option *ngFor="#province of provinces" [value]="province.codigo_provincia" [selected]="onProvinceSelected(province, _ActualAssociate)"> {{province.nombre_provincia}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="type">Cantón</label>
+                      <select #cantonSelect class="form-control" [disabled]="!isEditingPersonalData" (change) = "onCantonChanged(cantonSelect.value)">
+                        <option [value] = null></option>
+                        <option *ngFor="#canton of cantones" [value]="canton.codigo_canton" [selected]="onCantonSelected(canton, _ActualAssociate)">{{canton.nombre_canton}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <a class="btn btn-danger" style="float: right;margin-left: 15px;" (click)="cancelEditPersonalData()" [style.display]="isEditingPersonalData ? '' : 'None'" >Cancelar</a>
+                <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingPersonalData ? '' : 'None'" >Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Ámbito Laboral
+      <a class="btn btn-primary" style="margin-left: 10px;" (click)="editWorkingData()" ><span class="glyphicon glyphicon-pencil" ></span></a>
+    </h2>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron">
+          <div class="section">
+            <div class="container">
+              <form role="form" (ngSubmit)="onSubmitWorkingData()" #workingDataForm="ngForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label" for="departmentName">Departamento</label>
+                      <select #departmentSelect class="form-control" [disabled]="!isEditingWorkingData" (change) = "onDepartmentChanged(departmentSelect.value)">
+                        <option [value] = null></option>
+                        <option *ngFor="#department of departments" [value]="department.codigo_departamento" [selected]="onDepartmentSelected(department, _ActualAssociate)">{{department.nombre_departamento}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="departmentName">Subdepartamento</label>
+                      <select #subDepartmentSelect class="form-control" [disabled]="!isEditingWorkingData" (change) = "onSubDepartmentChanged(subDepartmentSelect.value)">
+                        <option [value] = null></option>
+                        <option *ngFor="#subDepartment of subDepartments" [value]="subDepartment.codigo_sub_departamento" [selected]="onSubDepartmentSelected(subDepartment, _ActualAssociate)">{{subDepartment.nombre_sub_departamento}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="checkbox-inline" style="font-size:18px">Cargo de jefatura</label>
+                      <input type="checkbox" style="width:25px;height:25px;margin-left:10;" [disabled]="!isEditingWorkingData" [checked]="_ActualAssociate.cargo_jefatura" (change) = "onBossChanged()">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label" for="departmentName">Número de extensión</label>
+                      <input class="form-control" type="number" [readonly]="!isEditingWorkingData" [(ngModel)]="_ActualAssociate.numero_extension">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="headquarters">Sede</label>
+                      <select #sedeSelect class="form-control" [disabled]="!isEditingWorkingData" (change) = "onSedeChanged(sedeSelect.value)">
+                        <option [value] = null ></option>
+                        <option *ngFor="#sede of sedes" [value]="sede.codigo_sede" [selected]="onSedeSelected(sede, _ActualAssociate)">{{sede.nombre_sede}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <a class="btn btn-danger" style="float: right;margin-left: 15px;" (click)="cancelEditWorkingData()" [style.display]="isEditingWorkingData ? '' : 'None'" >Cancelar</a>
+                <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingWorkingData ? '' : 'None'" >Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Gustos y Preferencias
+      <a class="btn btn-primary" style="margin-left: 10px;" (click)="editPreferiencesData()"><span class="glyphicon glyphicon-pencil"></span></a>
+    </h2>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron">
+          <div class="section">
+            <div class="container">
+              <form role="form" (ngSubmit)="onSubmitPreferiencesData()" #preferiencesDataForm="ngForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="type">Talla de camisa</label>
+                      <select #shirtSizesSelect class="form-control" [disabled]="!isEditingPreferienciesData" (change) = "onShirtSizeChanged(shirtSizesSelect.value)">
+                        <option [value]=""></option>
+                        <option *ngFor="#shirtSize of shirtSizes" [value]="shirtSize.codigo_talla_camisa"
+                        [selected]="onShirtSizeSelected(shirtSize, _ActualAssociate) ">{{shirtSize.codigo_talla_camisa}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="checkbox-inline" style="font-size:18px"> Vegetariano</label>
+                      <input type="checkbox" [checked]="_ActualAssociate.vegetariano" style="margin-left:10;width:25px;height:25px;" [disabled]="!isEditingPreferienciesData" (change) = "onVegetarianChanged()">
+                    </div>
+                  </div>
+                </div>
+                <a type="submit" class="btn btn-danger" style="float: right;margin-left: 15px;" (click)="cancelEditPreferienciesData()" [style.display]="isEditingPreferienciesData ? '' : 'None'" >Cancelar</a>
+                <button type="submit" class="btn btn-success" style="float: right;" [style.display]="isEditingPreferienciesData ? '' : 'None'" >Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<loading *ngIf="isLoading"></loading>
+<emailModal [component]="component"></emailModal>
+<Alert *ngIf="showMsg" [message]="message"></Alert>

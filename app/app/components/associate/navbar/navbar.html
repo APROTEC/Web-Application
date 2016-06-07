@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/app/events"><img class=".img-thumbnail"src="images/logoAPROTEC.gif"></a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li [class.active]="isRouteActive('Events')">
+            <a [routerLink]="['Events']">Eventos</a>
+          </li>
+          <li [class.active]="isRouteActive('AssociateDetail')">
+            <a [routerLink]="['AssociateDetail']">Informacion Personal</a>
+          </li>
+          <li [class.active]="isRouteActive('Documents')">
+            <a [routerLink]="['Documents']">Documentos</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a (click)="logOut()"><span class="glyphicon glyphicon-log-out"></span> Salir </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,10 @@
+.commentContainer {
+  margin-top: 20px;
+  border-style: ridge;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0; }
+  .commentContainer h1, .commentContainer h2, .commentContainer h3, .commentContainer p {
+    color: black; }
+
+/*# sourceMappingURL=event-comments.css.map */

@@ -1,0 +1,27 @@
+<div class="section">
+  <div class="container-fluid">
+    <h2>Comentarios&nbsp;</h2>
+    <hr>
+    <div class="row">
+      <div class="col-md-12" *ngFor="#comment of _Comments">
+        <div class="row">
+          <div class="jumbotron commentContainer">
+            <div class="container-fluid">
+              <div class="col-md-2">
+                <img src="http://{{comment.asociado.foto}}"class="center-block img-circle " style="margin-top:10px; width:100px;height:100px" >
+              </div>
+              <div class="col-md-10">
+                <h3 class="text-left">{{comment.asociado.nombre}} {{comment.asociado.apellidos}}</h3>
+                <div class = "container-fluid">
+                  <p class="text-justify" style="margin-right:-30px;font-size:16">{{comment.comentario}}</p>
+                  <!--h5 class="text-right" style="margin-right:-30px">3 de marzo del 2016</h5-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<loading *ngIf="isPageLoading"></loading>

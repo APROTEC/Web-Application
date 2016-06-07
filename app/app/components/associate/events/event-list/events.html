@@ -1,0 +1,58 @@
+<div class="section" [style.opacity]="isLoading ? '0' : '1' ">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <row>
+          <h1 class="text-center">Eventos</h1>
+        </row>
+        <div class="section">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-md-12">
+                <div class="col-xs-offset-2 col-xs-6 col-md-offset-2 col-md-6">
+                  <input [(ngModel)]="searchTerm" type="text" class="form-control" placeholder="Ingrese su búsqueda" (keyup)="onStateChanged()" >
+                </div>
+                <div class="col-xs-2 col-md-2">
+                  <span class="input-group-btn">
+                    <select #selectTypeEvent class="form-control" (change) = "onTypeEventChanged(selectTypeEvent.value)">
+                      <option value="Todos">Todos</option>
+                      <option *ngFor="#type of eventTypes" [value]="type.codigo_tipo_evento">{{type.descripcion}}</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+              <div class="row" style="text-align: center; font-size: 15px;">
+                <label class="checkbox-inline plainText">
+                  <input type="checkbox"  [checked]="isPedingChecked" (change)="onEventsPendingChanged()">Pendientes</label>
+                <label class="checkbox-inline plainText">
+                  <input type="checkbox" [checked]="isDoneChecked" (change) = "onEventsDoneChanged()">Realizados</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <p>Mostrando {{tempEvents.length}} resultados</p>
+        </div>
+        <div class="container-fluid ">
+          <div *ngFor="#event of tempEvents" class="col-md-6">
+            <a (click)="goToEvent(event)">
+              <div class="container-fluid eventContainer">
+                <div class="col-md-12">
+                  <div class="col-md-4 hidden-xs" style="width:150px;">
+                    <img src="images/reunion.png" class="img-circle img-responsive">
+                  </div>
+                  <div class="col-md-8">
+                    <h3>{{event.nombre}}</h3>
+                    <p style="color:black;" class="text-left">{{event.descripcion}}</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loading *ngIf="isLoading"></loading>

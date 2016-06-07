@@ -1,0 +1,19 @@
+input{
+  color:black;
+  :disabled{
+    cursor: pointer;
+    color:black;
+  }
+}
+select{
+  :disabled{
+    cursor: pointer;
+    color:black;
+  }
+  option{
+    :disabled{
+      cursor: pointer;
+      color:black;
+    }
+  }
+}

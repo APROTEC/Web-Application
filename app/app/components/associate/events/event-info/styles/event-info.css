@@ -1,0 +1,14 @@
+input {
+  color: black; }
+  input :disabled {
+    cursor: pointer;
+    color: black; }
+
+select :disabled {
+  cursor: pointer;
+  color: black; }
+select option :disabled {
+  cursor: pointer;
+  color: black; }
+
+/*# sourceMappingURL=event-info.css.map */
