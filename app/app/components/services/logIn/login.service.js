@@ -64,6 +64,7 @@ System.register(['angular2/core', '../../shared/httpConfig/httpConfig', 'angular
                     var url = httpConfig_1.httpConfig.host + 'usuarios/loginU/' + pUserName + "-" + pPassword;
                     return this.http.get(url)
                         .map(function (res) { return res.json(); })
+                        .do(function (data) { return console.log(data); })
                         .catch(this.handleError);
                 };
                 LogInService.prototype.handleError = function (error) {

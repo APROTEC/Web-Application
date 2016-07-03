@@ -21,6 +21,7 @@ export class LogInService {
     let url = httpConfig.host+'usuarios/loginU/'+pUserName+"-"+pPassword;
     return this.http.get(url)
                       .map(res => <User[]> res.json())
+                      .do(data => console.log(data))
                       .catch(this.handleError);
   }
 

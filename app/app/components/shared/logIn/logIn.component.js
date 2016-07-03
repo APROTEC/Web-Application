@@ -46,6 +46,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
                     this.LogInService = LogInService;
                     this.actualUser = new user_1.User();
                     this._User = new user_1.User();
+                    this.isLoggingCorrect = false;
                     this.isLoading = false;
                     this.isPageLoading = false;
                     this.showAlertMsg = false;
@@ -68,21 +69,31 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
                     var _this = this;
                     this.isLoading = true;
                     this.verifyAdminUser(this.actualUser.nombre_usuario, this.actualUser.contrasena).then(function (t) {
-                        _this._cookieService.put("userName", _this._User.nombre_usuario);
-                        _this._cookieService.put("password", _this.actualUser.contrasena);
-                        _this._cookieService.put("userType", _this._User.codigo_tipo_usuario);
-                        _this._cookieService.put("userCode", _this._User.codigo_usuario.toString());
-                        _this._router.navigate(['NavbarAdmin']);
-                        _this.isLoading = false;
-                    }).catch(function (c) {
-                        _this.verifyNormalUser(_this.actualUser.nombre_usuario, _this.actualUser.contrasena).then(function (t) {
-                            _this._cookieService.put("userName", _this._User.nombre_usuario);
+                        if (_this._User) {
+                            _this.isLoggingCorrect = true;
                             _this._cookieService.put("password", _this.actualUser.contrasena);
+                            _this._cookieService.put("userName", _this._User.nombre_usuario);
                             _this._cookieService.put("userType", _this._User.codigo_tipo_usuario);
                             _this._cookieService.put("userCode", _this._User.codigo_usuario.toString());
-                            console.log("logeado");
-                            _this._router.navigate(['NavbarAssociate']);
+                            _this._router.navigate(['NavbarAdmin']);
                             _this.isLoading = false;
+                        }
+                    }).then(function (c) {
+                        _this.verifyNormalUser(_this.actualUser.nombre_usuario, _this.actualUser.contrasena).then(function (t) {
+                            if (_this._User) {
+                                _this.isLoggingCorrect = true;
+                                _this._cookieService.put("userName", _this._User.nombre_usuario);
+                                _this._cookieService.put("password", _this.actualUser.contrasena);
+                                _this._cookieService.put("userType", _this._User.codigo_tipo_usuario);
+                                _this._cookieService.put("userCode", _this._User.codigo_usuario.toString());
+                                _this._router.navigate(['NavbarAssociate']);
+                                _this.isLoading = false;
+                            }
+                        }).then(function (n) {
+                            if (!_this.isLoggingCorrect) {
+                                _this.showAlertMsg = true;
+                                setTimeout(function () { _this.showAlertMsg = false; }, 5000);
+                            }
                         });
                     });
                 };
@@ -94,7 +105,6 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
                 };
                 logInComponent.prototype.verifyNormalUser = function (pUserName, pPassword) {
                     var _this = this;
-                    console.log("logeando usuario normal");
                     return this.LogInService.getNormalUser(pUserName, pPassword).toPromise().catch(function (error) { return _this.isLoading = false; }).then(function (Users) { return _this._User = Users[0]; });
                 };
                 logInComponent = __decorate([

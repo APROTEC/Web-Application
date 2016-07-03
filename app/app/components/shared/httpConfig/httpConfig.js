@@ -9,7 +9,7 @@ System.register([], function(exports_1, context_1) {
                 function httpConfig() {
                 }
                 httpConfig.prototype.construct = function () { };
-                httpConfig.host = "http://webserviceaprotec.herokuapp.com/";
+                httpConfig.host = "http://104.236.61.198:8081/";
                 return httpConfig;
             }());
             exports_1("httpConfig", httpConfig);
