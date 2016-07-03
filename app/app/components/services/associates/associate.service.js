@@ -82,8 +82,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
-                AssociatesService.prototype.createAssociate = function (nombre, apellidos, correo_institucional, nombre_usuario) {
-                    var body = JSON.stringify({ nombre: nombre, apellidos: apellidos, correo_institucional: correo_institucional, nombre_usuario: nombre_usuario });
+                AssociatesService.prototype.createAssociate = function (nombre, apellidos, correo_institucional, nombre_usuario, cedula, contrasena) {
+                    var body = JSON.stringify({ nombre: nombre, apellidos: apellidos, correo_institucional: correo_institucional, nombre_usuario: nombre_usuario, cedula: cedula, contrasena: contrasena });
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
                     return this.http.post(httpConfig_1.httpConfig.host + "usuarios/" + body, body, options)

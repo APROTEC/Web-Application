@@ -33,7 +33,7 @@ System.register(['angular2/core', '../../../services/associates/associate.servic
                 }
                 AssociateNewComponent.prototype.createAssociate = function () {
                     var _this = this;
-                    this._AssociatesService.createAssociate(this.name, this.lastNames, this.email, this.email).subscribe(function (group) { }, function (error) { return _this.errorMsg = error; });
+                    this._AssociatesService.createAssociate(this.name, this.lastNames, this.email, this.email, this.id, this.id.toString()).subscribe(function (group) { }, function (error) { return _this.errorMsg = error; });
                     this.showMsg = true;
                     setTimeout(function () { _this.showMsg = false; }, 5000);
                 };

@@ -63,9 +63,9 @@ export class AssociatesService {
   }
 
   //-------------------------------------------------- Post ------------------------------------------------
-  createAssociate (nombre: string, apellidos:string, correo_institucional:string,nombre_usuario:string) : Observable<Associate>  {
+  createAssociate (nombre: string, apellidos:string, correo_institucional:string,nombre_usuario:string, cedula:number, contrasena:string) : Observable<Associate>  {
 
-    let body = JSON.stringify({ nombre,apellidos,correo_institucional,nombre_usuario });
+    let body = JSON.stringify({ nombre,apellidos,correo_institucional,nombre_usuario,cedula,contrasena });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
