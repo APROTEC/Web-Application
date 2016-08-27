@@ -10,7 +10,8 @@ import {Alert} from '../../../shared/alerts/alert.compononet';
     selector: 'eventNew',
     templateUrl:'app/components/admin/events/event-new/event-new.html',
     styleUrls:['app/components/admin/events/event-new/styles/event-new.css'],
-    directives:[Alert]
+    directives:[Alert],
+    providers : [EventService]
 
 })
 

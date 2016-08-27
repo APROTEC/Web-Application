@@ -9,7 +9,7 @@ angular.module('fileUploadEvent', ['ngFileUpload'])
 
       $http({
         method: 'GET',
-        url: 'http://104.236.61.198:8081/eventos'
+        url: 'http://104.236.61.'http://104.236.61.198:8081198:8081/eventos'
       }).then(function successCallback(response) {
           $scope.data.availableOptions = response.data
 
@@ -33,7 +33,7 @@ angular.module('fileUploadEvent', ['ngFileUpload'])
        console.log(body)
         Upload.upload({
             //url: 'http://localhost:8081/actas/'+body, //webAPI exposed to upload the file
-            url: 'http://104.236.61.198:8081/eventos_documentos/'+body, //webAPI exposed to upload the file
+            url: 'http://webserviceaprotec.herokuapp.com/eventos_documentos/'+body, //webAPI exposed to upload the file
             data:{file:file} //pass file as data, should be user ng-model
         }).then(function (resp) { //upload function returns a promise
             if(resp.data.error_code === 0){ //validate success

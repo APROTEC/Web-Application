@@ -54,13 +54,16 @@ System.register(['angular2/core', 'angular2/router', '../../../services/groups/g
                 GroupAddComponent.prototype.addGroups = function () {
                     var _this = this;
                     if (this.component.type == "Events") {
-                        this._Groups.forEach(function (g) { _this.postGroupEvent(_this.component.id, g.codigo_grupo); });
+                        this._Groups.forEach(function (g) { if (g.state == true)
+                            _this.postGroupEvent(_this.component.id, g.codigo_grupo); });
                     }
                     else if (this.component.type == "Documents") {
-                        this._Groups.forEach(function (g) { _this.postGroupDocument(_this.component.id, g.codigo_grupo); });
+                        this._Groups.forEach(function (g) { if (g.state == true)
+                            _this.postGroupDocument(_this.component.id, g.codigo_grupo); });
                     }
                     else if (this.component.type == "Forms") {
-                        this._Groups.forEach(function (g) { _this.postGroupForms(_this.component.id, g.codigo_grupo); });
+                        this._Groups.forEach(function (g) { if (g.state == true)
+                            _this.postGroupForms(_this.component.id, g.codigo_grupo); });
                     }
                 };
                 GroupAddComponent.prototype.changeState = function (pGroup) {

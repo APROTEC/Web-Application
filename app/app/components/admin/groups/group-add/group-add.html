@@ -8,7 +8,7 @@
       <div class="modal-body">
         <div class="checkbox" *ngFor="#group of _Groups">
           <label>
-            <input type="checkbox" [checked]="group.state" (click)="changeState(group,group.state)" >{{group.descripcion_grupo}}</label>
+            <input type="checkbox" [checked]="group.state" (click)="changeState(group)" >{{group.descripcion_grupo}}</label>
         </div>
       </div>
       <div class="modal-footer">

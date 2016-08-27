@@ -113,9 +113,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
                         directives: [alert_compononet_1.Alert, passwordReset_component_1.PassResetComponent],
                         providers: [core_2.CookieService, login_service_1.LogInService, loading_component_1.LoadingComponent, passwordReset_component_1.PassResetComponent]
                     }), 
-                    __metadata('design:paramtypes', [core_2.CookieService, router_1.Router, login_service_1.LogInService])
+                    __metadata('design:paramtypes', [core_2.CookieService, router_1.Router, (typeof (_a = typeof login_service_1.LogInService !== 'undefined' && login_service_1.LogInService) === 'function' && _a) || Object])
                 ], logInComponent);
                 return logInComponent;
+                var _a;
             }());
             exports_1("logInComponent", logInComponent);
         }

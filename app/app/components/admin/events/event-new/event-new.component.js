@@ -62,7 +62,8 @@ System.register(['angular2/core', 'angular2/router', '../../../shared/basics/eve
                         selector: 'eventNew',
                         templateUrl: 'app/components/admin/events/event-new/event-new.html',
                         styleUrls: ['app/components/admin/events/event-new/styles/event-new.css'],
-                        directives: [alert_compononet_1.Alert]
+                        directives: [alert_compononet_1.Alert],
+                        providers: [event_service_1.EventService]
                     }), 
                     __metadata('design:paramtypes', [event_service_1.EventService, router_1.Router])
                 ], EventNewComponent);

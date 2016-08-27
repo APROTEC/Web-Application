@@ -34,11 +34,11 @@ export class GroupAddComponent implements OnInit{
 
     addGroups(){
       if (this.component.type == "Events"){
-        this._Groups.forEach(g => {this.postGroupEvent(this.component.id, g.codigo_grupo)})
+        this._Groups.forEach(g => {if(g.state == true) this.postGroupEvent(this.component.id, g.codigo_grupo)})
       }else if(this.component.type == "Documents"){
-        this._Groups.forEach(g => {this.postGroupDocument(this.component.id, g.codigo_grupo)})
+        this._Groups.forEach(g => {if(g.state == true) this.postGroupDocument(this.component.id, g.codigo_grupo)})
       }else if(this.component.type == "Forms"){
-        this._Groups.forEach(g => {this.postGroupForms(this.component.id, g.codigo_grupo)})
+        this._Groups.forEach(g => {if(g.state == true) this.postGroupForms(this.component.id, g.codigo_grupo)})
       }
     }
     changeState(pGroup){
