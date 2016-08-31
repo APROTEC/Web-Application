@@ -48,7 +48,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .catch(this.handleError);
                 };
                 FormsService.prototype.createForm = function (nombre_encuesta, link_encuesta) {
-                    link_encuesta = link_encuesta.replace("/", "%2F");
+                    link_encuesta = link_encuesta.replace(/\//g , "%2F");
                     var body = JSON.stringify({ nombre_encuesta: nombre_encuesta, link_encuesta: link_encuesta });
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
