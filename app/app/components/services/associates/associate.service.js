@@ -90,9 +90,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json().data; })
                         .catch(this.handleError);
                 };
-                AssociatesService.prototype.updateAssociate = function (codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano, codigo_sede, codigo_canton, cedula, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension) {
+                AssociatesService.prototype.updateAssociate = function (codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano, codigo_sede, codigo_canton, cedula, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension,codigo_tipo_usuario) {
                     var body = JSON.stringify({ codigo_informacion_persona: codigo_informacion_persona, correo_personal: correo_personal, fecha_nacimiento: fecha_nacimiento, codigo_talla_camisa: codigo_talla_camisa, cargo_jefatura: cargo_jefatura, vegetariano: vegetariano,
-                        codigo_sede: codigo_sede, codigo_canton: codigo_canton, cedula: cedula, codigo_sub_departamento: codigo_sub_departamento, correo_institucional: correo_institucional, telefono_trabajo: telefono_trabajo, numero_extension: numero_extension });
+                        codigo_sede: codigo_sede, codigo_canton: codigo_canton, cedula: cedula, codigo_sub_departamento: codigo_sub_departamento, correo_institucional: correo_institucional, telefono_trabajo: telefono_trabajo, numero_extension: numero_extension,codigo_tipo_usuario });
                     var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_2.RequestOptions({ headers: headers });
                     return this.http.put(httpConfig_1.httpConfig.host + "personas/" + body, body, options)

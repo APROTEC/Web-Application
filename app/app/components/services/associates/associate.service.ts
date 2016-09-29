@@ -75,9 +75,9 @@ export class AssociatesService {
   }
   //-------------------------------------------------- Update ---------------------------------------------
   updateAssociate (codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano,
-  codigo_sede, codigo_canton, cedula, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension) : Observable<Associate>  {
+  codigo_sede, codigo_canton, cedula, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension,codigo_tipo_usuario) : Observable<Associate>  {
     let body = JSON.stringify({ codigo_informacion_persona, correo_personal, fecha_nacimiento, codigo_talla_camisa, cargo_jefatura, vegetariano,
-    codigo_sede, codigo_canton, cedula, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension });
+    codigo_sede, codigo_canton, cedula, codigo_sub_departamento, correo_institucional, telefono_trabajo, numero_extension,codigo_tipo_usuario });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(httpConfig.host+"personas/"+body, body, options)

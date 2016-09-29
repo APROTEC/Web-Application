@@ -124,6 +124,10 @@
                       <label class="checkbox-inline" style="font-size:18px">Cargo de jefatura</label>
                       <input type="checkbox" style="width:25px;height:25px;margin-left:10;" [disabled]="!isEditingWorkingData" [checked]="_ActualAssociate.cargo_jefatura" (change) = "onBossChanged()">
                     </div>
+                    <div class="form-group">
+                      <label class="checkbox-inline" style="font-size:18px">Administrador</label>
+                      <input type="checkbox" style="width:25px;height:25px;margin-left:10;" [disabled]="!isEditingWorkingData" [checked]="_ActualAssociate.codigo_tipo_usuario=='a'?1:0" (change) = "onAdminChanged()" >
+                    </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">

@@ -70,6 +70,13 @@ System.register(['angular2/core', 'angular2/router', 'rxjs/Observable', '../../.
                     this.isEditing = pState;
                 };
                 EventInfoComponent.prototype.deleteEvent = function () {
+                    var _this = this;
+                    this._EventService.deleteEvent(this._Event.codigo_evento).subscribe(function (event) { }, function (error) { }, function () {
+                        _this.message.message = "Se ha eliminado el evento";
+                        _this.message.typeMessage = "Success";
+                        _this.showMsg = true;
+                        setTimeout(function () { _this.showMsg = false; }, 5000);
+                    });
                 };
                 EventInfoComponent.prototype.cancelEdit = function () {
                     this.isEditing = false;

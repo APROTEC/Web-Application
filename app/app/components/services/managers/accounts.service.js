@@ -41,6 +41,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                AccountService.prototype.changePassword = function (pUser,pPassword) {
+                    return this.http.put(httpConfig_1.httpConfig.host + "usuarios/cambiar_contrasena/" + pUser+"-"+pPassword)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 AccountService.prototype.handleError = function (error) {
                     return Observable_1.Observable.throw(error.json().error || 'Server error');
                 };

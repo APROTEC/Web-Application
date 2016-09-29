@@ -8,6 +8,7 @@ import { EventsComponent } from '../events/event-list/events.component';
 import { EventDetailComponent } from '../events/event-detail/event-detail.component';
 import { AssociateDetailComponent } from '../associates/associate-detail/associate-detail.component';
 import { DocumentListComponent } from '../documents/document-list/document-list.component';
+import {AccountComponent} from '../managers/account/account.component';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { DocumentListComponent } from '../documents/document-list/document-list.
   { path: '/events', name: 'Events', component: EventsComponent, useAsDefault:true },
   { path: '/events/:id/...', name: 'EventDetail', component: EventDetailComponent},
   { path: '/associate', name: 'AssociateDetail', component: AssociateDetailComponent},
-  { path: '/documents', name: 'Documents', component: DocumentListComponent}
+  { path: '/account', name:'Account', component: AccountComponent}
 
 ])
 export class NavbarAssociateComponent implements OnInit {

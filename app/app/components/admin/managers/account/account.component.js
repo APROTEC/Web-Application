@@ -54,7 +54,19 @@ System.register(['angular2/core', 'angular2-cookie/core', '../../../shared/basic
                     this.isEditing = false;
                 };
                 AccountComponent.prototype.onSubmit = function () {
-                    this.isEditing = false;
+              
+                    if(this._User.contrasena != this._User.contrasenaRepetida){
+                        alert("Las contraseñas ingresadas no coinciden");
+                    }
+                    else{
+                         if(this._User.contrasena.length<4){
+                            alert("La contraseña debe tener más de 4 caracteres");
+                        }
+                        else{
+                            this.changePassword();
+
+                        }
+                    }
                 };
                 AccountComponent.prototype.getUser = function () {
                     var _this = this;
@@ -64,6 +76,11 @@ System.register(['angular2/core', 'angular2-cookie/core', '../../../shared/basic
                     var _this = this;
                     this._AccountService.getPerson(+this.userCode).retry(3).subscribe(function (associate) { _this._Associate = associate[0]; }, function (error) { }, function () { });
                 };
+                AccountComponent.prototype.changePassword = function () {
+                    var _this = this;
+                    this._AccountService.changePassword(this.userCode,this._User.contrasena).retry(3).subscribe(function () { alert("Contraseña cambiada"); }, function (error) { }, function () { });
+                };
+
                 AccountComponent = __decorate([
                     core_1.Component({
                         selector: 'account',

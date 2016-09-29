@@ -149,6 +149,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../../sha
                         .map(function (res) { return res.json().data; })
                         .catch(this.handleError);
                 };
+                EventService.prototype.deleteEvent = function (codigo_evento) {
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    return this.http.delete(httpConfig_1.httpConfig.host + "eventos/" + codigo_evento, options)
+                        .map(function (res) { return res.json().data; })
+                        .catch(this.handleError);
+                };
                 EventService.prototype.deleteDocument = function (codigo_evento_documento) {
                     var body = JSON.stringify({ codigo_evento_documento: codigo_evento_documento });
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

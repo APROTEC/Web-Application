@@ -29,17 +29,17 @@
 
                 <div class="form-group">
                   <label class="control-label" for="password">Contraseña</label>
-                  <input class="form-control" type="password" [readonly]="!isEditing" [(ngModel)]="_User.contrasena" required>
+                  <input class="form-control" type="password" [(ngModel)]="_User.contrasena" required>
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="repeatedPassword">Repetir contraseña</label>
-                  <input class="form-control" type="password" [readonly]="!isEditing" required>
+                  <input class="form-control" type="password" [(ngModel)]="_User.contrasenaRepetida" required>
                 </div>
               </div>
             </div>
             <a class="btn btn-danger" style="float: right;margin-left: 15px;" [style.display]="isEditing ? '' : 'None'" (click)="cancel()">Cancelar</a>
             <button type="submit" class="btn btn-success" style="float: right
-            ;" [style.display]="isEditing ? '' : 'None'" >Guardar</button>
+            ;">Cambiar contraseña</button>
           </form>
         </div>
       </div>

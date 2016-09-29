@@ -106,6 +106,13 @@ System.register(['angular2/core', 'angular2/router', '../../../shared/basics/ass
                 AssociateDetailComponent.prototype.onBossChanged = function (pIsBoss) {
                     this._ActualAssociate.cargo_jefatura = !this._ActualAssociate.cargo_jefatura;
                 };
+                AssociateDetailComponent.prototype.onAdminChanged = function(pIsAdmin){
+                    if(this._ActualAssociate.codigo_tipo_usuario == 'n')
+                        this._ActualAssociate.codigo_tipo_usuario ='a';
+                    else{
+                        this._ActualAssociate.codigo_tipo_usuario ='n';
+                    }
+                };
                 AssociateDetailComponent.prototype.onShirtSizeSelected = function (pShirtSize, pAssociate) {
                     if (pAssociate.talla_camisa && pAssociate.talla_camisa.codigo_talla_camisa != "") {
                         return pShirtSize.codigo_talla_camisa == pAssociate.talla_camisa.codigo_talla_camisa;
@@ -278,7 +285,7 @@ System.register(['angular2/core', 'angular2/router', '../../../shared/basics/ass
                         pAssociate.sub_departamento = new associate_1.SubDepartment(null, "");
                     }
                     console.log(pAssociate.sede);
-                    this._AssociatesService.updateAssociate(this.associateId, pAssociate.correo_personal, pAssociate.fecha_nacimiento, pAssociate.talla_camisa.codigo_talla_camisa, pAssociate.cargo_jefatura, pAssociate.vegetariano, pAssociate.sede.codigo_sede, pAssociate.canton.codigo_canton, pAssociate.cedula, pAssociate.sub_departamento.codigo_sub_departamento, pAssociate.correo_institucional, pAssociate.telefono_trabajo, pAssociate.numero_extension).subscribe(function (group) { }, function (error) { }, function () {
+                    this._AssociatesService.updateAssociate(this.associateId, pAssociate.correo_personal, pAssociate.fecha_nacimiento, pAssociate.talla_camisa.codigo_talla_camisa, pAssociate.cargo_jefatura, pAssociate.vegetariano, pAssociate.sede.codigo_sede, pAssociate.canton.codigo_canton, pAssociate.cedula, pAssociate.sub_departamento.codigo_sub_departamento, pAssociate.correo_institucional, pAssociate.telefono_trabajo, pAssociate.numero_extension,pAssociate.codigo_tipo_usuario).subscribe(function (group) { }, function (error) { }, function () {
                         _this.message.message = "Se han guardado los cambios";
                         _this.message.typeMessage = "Success";
                         _this.showMsg = true;

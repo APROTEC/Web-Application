@@ -5,6 +5,7 @@ import {Observable}     from 'rxjs/Observable';
 import {Associate,Province,ShirtSize,Canton,Sede,Department,SubDepartment} from '../../../shared/basics/associate/associate';
 import {emailComponent} from '../../../shared/email/email.component';
 import {AssociatesService} from '../../../services/associates/associate.service';
+import {AccountService} from '../../../services/managers/accounts.service';
 import {LoadingComponent} from '../../../shared/loading/loading.component';
 import {Alert} from '../../../shared/alerts/alert.compononet';
 
@@ -101,6 +102,15 @@ export class AssociateDetailComponent implements OnInit{
     onBossChanged(pIsBoss){
       this._ActualAssociate.cargo_jefatura = !this._ActualAssociate.cargo_jefatura
     }
+
+     onAdminChanged(pIsAdmin){
+          if(this._ActualAssociate.codigo_tipo_usuario == 'n')
+            this._ActualAssociate.codigo_tipo_usuario ='a';
+          else{
+             this._ActualAssociate.codigo_tipo_usuario ='n';
+          }
+        }
+
     onShirtSizeSelected(pShirtSize:ShirtSize, pAssociate:Associate){
       if(pAssociate.talla_camisa && pAssociate.talla_camisa.codigo_talla_camisa != ""){
          return pShirtSize.codigo_talla_camisa == pAssociate.talla_camisa.codigo_talla_camisa;
@@ -313,7 +323,7 @@ export class AssociateDetailComponent implements OnInit{
       pAssociate.talla_camisa.codigo_talla_camisa,pAssociate.cargo_jefatura, pAssociate.vegetariano,pAssociate.sede.codigo_sede,
       pAssociate.canton.codigo_canton,pAssociate.cedula,
       pAssociate.sub_departamento.codigo_sub_departamento, pAssociate.correo_institucional,
-      pAssociate.telefono_trabajo, pAssociate.numero_extension).subscribe(
+      pAssociate.telefono_trabajo, pAssociate.numero_extension,pAssociate.codigo_tipo_usuario).subscribe(
         group => {},
         error => {},
         () => {

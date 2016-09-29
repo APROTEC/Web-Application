@@ -18,6 +18,7 @@ export class Associate{
   public numero_extension:string = " ";
   public foto:string;
   public codigo_usuario:number = 0;
+  public codigo_tipo_usuario:string = "n";
   constructor(){
     this.talla_camisa = new ShirtSize(" ")
   }
