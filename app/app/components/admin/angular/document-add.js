@@ -14,7 +14,7 @@ angular.module('fileUpload', ['ngFileUpload'])
        var body= JSON.stringify(obj);
         Upload.upload({
             //url: 'http://localhost:5000/actas/'+body, //webAPI exposed to upload the file
-            url: 'http://104.236.61.198:8081/actas/'+body, //webAPI exposed to upload the file
+            url: 'http://45.55.155.151:8081/actas/'+body, //webAPI exposed to upload the file
             data:{file:file} //pass file as data, should be user ng-model
         }).then(function (resp) { //upload function returns a promise
             if(resp.data.error_code === 0){ //validate success

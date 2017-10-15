@@ -9,7 +9,7 @@ angular.module('fileUploadEvent', ['ngFileUpload'])
 
       $http({
         method: 'GET',
-        url: 'http://104.236.61.'http://104.236.61.198:8081198:8081/eventos'
+        url: 'http://45.55.155.151:8081198:8081/eventos'
       }).then(function successCallback(response) {
           $scope.data.availableOptions = response.data
 
