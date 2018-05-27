@@ -288,6 +288,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-cookie/core', '..
                         _this.showMsg = true;
                         setTimeout(function () { _this.showMsg = false; }, 5000);
                     });
+                    console.log(this.associateId, pAssociate.correo_personal, pAssociate.fecha_nacimiento, pAssociate.talla_camisa.codigo_talla_camisa, pAssociate.cargo_jefatura, pAssociate.vegetariano, pAssociate.sede.codigo_sede, pAssociate.canton.codigo_canton, pAssociate.cedula, pAssociate.sub_departamento.codigo_sub_departamento, pAssociate.correo_institucional, pAssociate.telefono_trabajo, pAssociate.numero_extension);
                 };
                 AssociateDetailComponent = __decorate([
                     core_1.Component({
