@@ -36,7 +36,7 @@ angular.module('fileUploadEvent', ['ngFileUpload'])
             url: 'http://45.55.155.151:8081/eventos_documentos/'+body, //webAPI exposed to upload the file
             data:{file:file} //pass file as data, should be user ng-model
         }).then(function (resp) { //upload function returns a promise
-            if(resp.data.error_code === 0){ //validate success
+            if(resp.data.error_code != 0){ //validate success
                 $window.alert('El archivo ha sido agregado');
             } else {
                 $window.alert('Ha ocurrido un error');
